@@ -1,1 +1,432 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Naturstien 🌿</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gd:#2d6a4f; --gm:#40916c; --gl:#74c69d; --gp:#d8f3dc;
+  --yellow:#f9c74f; --brown:#6b4226; --cream:#fefae0; --red:#e63946;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--gd);min-height:100vh;overflow-x:hidden;}
 
+.bg{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,#1a4731 0%,#2d6a4f 40%,#40916c 100%);overflow:hidden;}
+.tree{position:absolute;bottom:0;opacity:.15;animation:sway 4s ease-in-out infinite;font-size:3rem;}
+.tree:nth-child(1){left:3%;font-size:4rem;animation-delay:0s}
+.tree:nth-child(2){left:12%;font-size:2.5rem;animation-delay:.5s}
+.tree:nth-child(3){left:22%;font-size:5rem;animation-delay:1s}
+.tree:nth-child(4){left:33%;font-size:3rem;animation-delay:.3s}
+.tree:nth-child(5){left:45%;font-size:4.5rem;animation-delay:.8s}
+.tree:nth-child(6){left:58%;font-size:3.5rem;animation-delay:1.2s}
+.tree:nth-child(7){left:68%;font-size:5rem;animation-delay:.2s}
+.tree:nth-child(8){left:78%;font-size:2.8rem;animation-delay:.7s}
+.tree:nth-child(9){left:88%;font-size:4rem;animation-delay:1.5s}
+.tree:nth-child(10){left:96%;font-size:3rem;animation-delay:.4s}
+@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;position:relative;z-index:10;}
+.card{background:var(--cream);border-radius:28px;padding:28px 24px;max-width:420px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.35);border:4px solid var(--gl);}
+
+.title{font-family:'Fredoka One',cursive;font-size:2.6rem;color:var(--gd);text-align:center;line-height:1.1;}
+.subtitle{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--gm);text-align:center;margin-top:4px;}
+.emoji-big{font-size:3.2rem;text-align:center;display:block;margin-bottom:6px;}
+.lbl{font-size:.88rem;font-weight:800;color:var(--gd);margin-bottom:5px;display:block;}
+.hint{font-size:.8rem;color:#888;text-align:center;margin-top:6px;}
+
+input[type=text],textarea{
+  width:100%;padding:13px 15px;border:3px solid var(--gl);border-radius:14px;
+  font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;
+  background:#fff;color:var(--gd);outline:none;margin-bottom:12px;
+  transition:border-color .2s,box-shadow .2s;
+}
+input:focus,textarea:focus{border-color:var(--gm);box-shadow:0 0 0 4px rgba(116,198,157,.25);}
+textarea{resize:none;}
+
+.btn{width:100%;padding:15px;border:none;border-radius:18px;font-family:'Fredoka One',cursive;font-size:1.25rem;cursor:pointer;transition:transform .15s,box-shadow .15s;margin-top:6px;}
+.btn-green{background:var(--gm);color:#fff;box-shadow:0 6px 0 var(--gd);}
+.btn-green:active{box-shadow:0 2px 0 var(--gd);transform:translateY(4px);}
+.btn-yellow{background:var(--yellow);color:var(--brown);box-shadow:0 6px 0 #b8860b;}
+.btn-yellow:active{box-shadow:0 2px 0 #b8860b;transform:translateY(4px);}
+
+.err{background:#fde8e8;color:#c0392b;border-radius:12px;padding:10px 14px;font-weight:700;font-size:.88rem;text-align:center;margin-top:6px;display:none;}
+.err.show{display:block;animation:shake .3s;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
+
+.member-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;}
+.member-row input{margin-bottom:0;flex:1;}
+.rm-btn{background:none;border:2px solid #ddd;border-radius:10px;width:38px;height:46px;cursor:pointer;font-size:1rem;color:#aaa;flex-shrink:0;transition:all .2s;}
+.rm-btn:hover{border-color:var(--red);color:var(--red);}
+.add-btn{background:none;border:2px dashed var(--gl);border-radius:12px;padding:9px;width:100%;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--gm);cursor:pointer;margin-bottom:12px;transition:all .2s;}
+.add-btn:hover{background:var(--gp);}
+
+.prog-wrap{background:rgba(45,106,79,.15);border-radius:99px;height:11px;overflow:hidden;margin:8px 0 4px;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gm),var(--gl));border-radius:99px;transition:width .5s;}
+.prog-txt{font-size:.78rem;font-weight:700;color:var(--gm);text-align:right;}
+
+.post-badge{display:flex;align-items:center;gap:10px;background:var(--gp);border-radius:14px;padding:10px 14px;margin-bottom:14px;}
+.post-num{background:var(--gm);color:#fff;font-family:'Fredoka One',cursive;font-size:1.3rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+.task-dots{display:flex;gap:6px;margin-bottom:12px;justify-content:center;}
+.task-dot{width:10px;height:10px;border-radius:50%;background:#ddd;transition:background .3s;}
+.task-dot.done{background:var(--gm);}
+.task-dot.active{background:var(--yellow);box-shadow:0 0 0 3px rgba(249,199,79,.3);}
+
+.q-box{background:#fff;border-radius:18px;padding:16px;border:3px solid var(--gp);margin-bottom:14px;}
+.q-text{font-size:1.1rem;font-weight:800;color:var(--gd);line-height:1.4;margin-bottom:12px;}
+.diff-tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:99px;margin-bottom:8px;}
+.diff-easy{background:#d8f3dc;color:var(--gd)}
+.diff-medium{background:#fff3cd;color:#856404}
+.diff-hard{background:#fde8e8;color:#c0392b}
+
+.choices{display:flex;flex-direction:column;gap:8px;}
+.choice{width:100%;text-align:left;padding:11px 14px;border:3px solid var(--gp);border-radius:13px;background:#fff;font-family:'Nunito',sans-serif;font-size:.98rem;font-weight:700;color:var(--gd);cursor:pointer;transition:all .2s;}
+.choice:hover{border-color:var(--gl);background:var(--gp);}
+.choice.selected{border-color:var(--gm);background:#b7e4c7;}
+
+.stars{display:flex;justify-content:center;gap:3px;margin:8px 0;flex-wrap:wrap;}
+.star{font-size:1rem;opacity:.2;transition:opacity .3s;}
+.star.lit{opacity:1;}
+
+.lock{font-size:2.6rem;text-align:center;display:block;animation:pulse 2s ease infinite;}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.trophy{font-size:5rem;display:block;text-align:center;animation:bounce 1s ease infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+.screen{display:none;}
+.screen.active{display:block;}
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="tree">🌲</div><div class="tree">🌿</div><div class="tree">🌳</div>
+  <div class="tree">🌲</div><div class="tree">🌳</div><div class="tree">🌲</div>
+  <div class="tree">🌳</div><div class="tree">🌿</div><div class="tree">🌲</div><div class="tree">🌳</div>
+</div>
+
+<!-- S1: Register -->
+<div id="s1" class="screen active">
+  <div class="page">
+    <div class="card">
+      <span class="emoji-big">🌿</span>
+      <div class="title">Naturstien</div>
+      <div class="subtitle">Familiekonkurransen</div>
+      <hr>
+      <label class="lbl">🏷️ Lagnavn</label>
+      <input type="text" id="teamName" placeholder="t.d. «De Raske Røtter»" maxlength="30">
+      <label class="lbl">👨‍👩‍👧‍👦 Hvem er på laget?</label>
+      <div id="memberList">
+        <div class="member-row"><input type="text" placeholder="Navn" class="mi" maxlength="25"><button class="rm-btn" onclick="rmMember(this)">✕</button></div>
+        <div class="member-row"><input type="text" placeholder="Navn" class="mi" maxlength="25"><button class="rm-btn" onclick="rmMember(this)">✕</button></div>
+      </div>
+      <button class="add-btn" onclick="addMember()">＋ Legg til person</button>
+      <div class="err" id="e1">Fyll inn lagnavn og minst ett navn!</div>
+      <button class="btn btn-green" onclick="startGame()">🌲 SPILL!</button>
+    </div>
+  </div>
+</div>
+
+<!-- S2: Post Picker -->
+<div id="s2" class="screen">
+  <div class="page" style="justify-content:flex-start;padding-top:28px;">
+    <div class="card" style="max-width:480px;">
+      <div style="text-align:center;margin-bottom:4px;">
+        <span style="font-size:2rem;">🗺️</span>
+        <div class="title" style="font-size:1.6rem;">Velg en post!</div>
+        <p style="font-size:.82rem;color:#777;font-weight:600;margin-top:4px;">Lag: <strong id="teamLbl" style="color:var(--gd);">–</strong></p>
+      </div>
+      <div class="prog-wrap"><div class="prog-fill" id="pb1" style="width:0%"></div></div>
+      <p class="prog-txt" id="pt1">0 / 8 poster fullført</p>
+      <hr>
+      <div id="postGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px;"></div>
+      <div id="doneAllMsg" style="display:none;text-align:center;background:var(--gp);border-radius:14px;padding:16px;margin-top:6px;">
+        <div style="font-size:2rem;">🎉</div>
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--gd);">Alle poster fullført!</div>
+        <button class="btn btn-green" style="margin-top:10px;" onclick="done()">Se resultater 🏆</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S2b: Password -->
+<div id="s2b" class="screen">
+  <div class="page">
+    <div class="card">
+      <span class="lock">🔒</span>
+      <div class="title" style="font-size:1.65rem;margin-top:8px;">Finn posten!</div>
+      <p style="text-align:center;color:#666;font-weight:600;font-size:.88rem;margin:6px 0 14px;">
+        Gå til <strong id="postLabel">Post 1</strong> og skriv inn koden du finner der
+      </p>
+      <hr>
+      <label class="lbl">🔑 Kode fra posten</label>
+      <input type="text" id="pwInput" placeholder="Skriv koden her..." autocomplete="off"
+        onkeydown="if(event.key==='Enter')checkPw()">
+      <div class="err" id="e2">Feil kode! Sjekk posten igjen 🔍</div>
+      <button class="btn btn-yellow" onclick="checkPw()">🔓 LÅS OPP</button>
+      <button class="btn" style="background:#eee;color:#666;margin-top:6px;font-size:1rem;" onclick="show('s2')">← Tilbake</button>
+    </div>
+  </div>
+</div>
+
+<!-- S3: Question -->
+<div id="s3" class="screen">
+  <div class="page">
+    <div class="card">
+      <div class="post-badge">
+        <div class="post-num" id="qNum">1</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:.92rem;color:var(--gd);" id="qTitle">Post 1</div>
+          <div style="font-size:.73rem;color:#888;" id="qSubTitle">Oppgave 1 av 3</div>
+        </div>
+      </div>
+      <div class="task-dots" id="taskDots"></div>
+      <div class="q-box">
+        <span class="diff-tag diff-easy" id="diffTag">🟢 Lett</span>
+        <div class="q-text" id="qText">Laster...</div>
+        <div class="choices" id="choicesArea"></div>
+        <div id="freeArea" style="display:none">
+          <textarea id="freeAns" placeholder="Skriv svaret ditt her..." rows="3" style="margin-bottom:0;"></textarea>
+        </div>
+      </div>
+      <div class="err" id="e3">Velg eller skriv inn et svar!</div>
+      <button class="btn btn-green" id="nextBtn" onclick="submitAns()">GÅ VIDERE ➡️</button>
+    </div>
+  </div>
+</div>
+
+<!-- S4: Done -->
+<div id="s4" class="screen">
+  <div class="page">
+    <div class="card" style="text-align:center;">
+      <span class="trophy">🏆</span>
+      <div class="title" style="margin-top:8px;">Gratulerer!</div>
+      <div class="subtitle">🎉 Naturstien fullført! 🎉</div>
+      <hr>
+      <div style="background:var(--gp);border-radius:13px;padding:13px;margin:8px 0;text-align:left;" id="finSummary"></div>
+      <p style="font-size:.92rem;font-weight:700;color:#555;margin-top:8px;line-height:1.5;text-align:center;">
+        🌲 Dere har nå fullført Naturstien. Svar blir annonsert i løpet av kvelden! 😄
+      </p>
+      <hr>
+      <div class="stars" id="finStars"></div>
+      <p class="hint">Ha det gøy resten av leirskolen! 🌲</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const POSTS = [
+{
+  password:"Skog",
+  tasks:[
+    {type:"multiple",difficulty:"Lett",question:"Hva heter treet som lager runde, brune eikenøtter?",choices:["Bjørk","Eik","Gran","Furu"],correct:1},
+    {type:"multiple",difficulty:"Lett",question:"Hvem synger 'Let it go' i Frost-filmen?",choices:["Anna","Ella","Elsa","Julia"],correct:2},
+    {type:"free",difficulty:"Vannskelig",question:"Hva spiser en pinnsvin?"}
+  ]
+},
+  {
+    password:"Leirskole",
+    tasks:[
+      {type:"multiple",difficulty:"Medium",question:"Hvilken av disse er en giftig sopp?",choices:["Kantarell","Sjampinjong","Rød fluesopp","Traktkantarell"],correct:2},
+      {type:"multiple",difficulty:"Lett",question:"Hvem er skogens konge?",choices:["Løve","Elg","Ape","Gorilla"],correct:1},
+      {type:"free",difficulty:"Medium",question:"Finn en sopp eller noe som ligner sopp i nærheten. Beskriv den – form, farge, lukt."}
+    ]
+  },
+  {
+    password:"Konge",
+    tasks:[
+      {type:"multiple",difficulty:"easy",question:"Hva spiser en elg? (velg beste svar)",choices:["Kjøtt og fisk","Kvister, bark og gress","Bare sopp","Bær og nøtter"],correct:1},
+      {type:"multiple",difficulty:"medium",question:"På hvilken side av trærne vokser mose oftest?",choices:["Sørsiden","Nordsiden","Østsiden","Vestsiden"],correct:1},
+      {type:"free",difficulty:"easy",question:"Hva tror dere elgen bruker denne skogen til? Skriv minst to ting."}
+    ]
+  },
+  {
+    password:"Banan",
+    tasks:[
+      {type:"multiple",difficulty:"medium",question:"Hva er spesielt med synet til rovfugler som spurvehauk?",choices:["Ser i mørket","Ser bakover","Ekstremt skarpt fremover","Er fargeblind"],correct:2},
+      {type:"multiple",difficulty:"medium",question:"Gaupen er Norges eneste ville kattedyr. Hva er spesielt med ørene?",choices:["Runde og korte","Lange hårtupper øverst","Foldbare","Usynlige"],correct:1},
+      {type:"free",difficulty:"medium",question:"Hør etter i 30 sekunder. Hvilke lyder hører dere? Skriv ned alt dere oppfatter."}
+    ]
+  },
+  {
+    password:"Tvedt",
+    tasks:[
+      {type:"multiple",difficulty:"hard",question:"Hva kalles prosessen der planter lager mat av sollys og CO₂?",choices:["Respirasjon","Fotosyntese","Pollinering","Evaporasjon"],correct:1},
+      {type:"multiple",difficulty:"hard",question:"Hvordan kan man se ca. hvor gammelt et tre er uten å felle det?",choices:["Telle greiner","Måle høyden","Telle vekstringer","Se på bladform"],correct:2},
+      {type:"free",difficulty:"hard",question:"Finn det største treet dere kan se. Estimer alderen – og forklar hvordan dere kom fram til svaret."}
+    ]
+  },
+  {
+    password:"Storm",
+    tasks:[
+      {type:"free",difficulty:"medium",question:"Hva kalles det når vann fordamper fra bladene til planter? Forklar prosessen med egne ord."}
+    ]
+  },
+  {
+    password:"Sommer",
+    tasks:[
+      {type:"free",difficulty:"medium",question:"Norge har bare én giftig slange. Hva heter den, og hva gjør dere om noen i laget blir bitt?"}
+    ]
+  },
+  {
+    password:"Løve",
+    tasks:[
+      {type:"free",difficulty:"hard",question:"Hva er det kuleste eller rareste dere har opplevd på Naturstien i dag? Beskriv det godt!"}
+    ]
+  }
+];
+
+const WEBHOOK = "https://discord.com/api/webhooks/1491538829310693686/tsFmVLbkGyT7riRLgZwgr1_WTj3F42QoGhJPriFVpLqd567xM18M_OYs9uflAbgyBf93";
+
+let teamName='', members=[], curPost=0, curTask=0, selChoice=null, curSession=null;
+let completedPosts=new Set();
+
+function startGame(){
+  teamName=document.getElementById('teamName').value.trim();
+  members=Array.from(document.querySelectorAll('.mi')).map(i=>i.value.trim()).filter(Boolean);
+  if(!teamName||!members.length){showErr('e1',true);return;}
+  showErr('e1',false);
+  curPost=0;curTask=0;selChoice=null;completedPosts=new Set();
+  const ts=new Date().toLocaleString('no-NO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  curSession={team:teamName,members:[...members],timestamp:ts,answers:[]};
+  showPostPicker();
+}
+
+function showPostPicker(){
+  show('s2');
+  document.getElementById('teamLbl').textContent=teamName;
+  const done=completedPosts.size;
+  document.getElementById('pb1').style.width=(done/POSTS.length*100)+'%';
+  document.getElementById('pt1').textContent=done+' / '+POSTS.length+' poster fullført';
+  const grid=document.getElementById('postGrid');
+  grid.innerHTML='';
+  POSTS.forEach((p,i)=>{
+    const isDone=completedPosts.has(i);
+    const btn=document.createElement('button');
+    btn.style.cssText=`padding:12px 4px;border-radius:16px;border:3px solid ${isDone?'var(--gm)':'var(--gl)'};background:${isDone?'var(--gm)':'#fff'};color:${isDone?'#fff':'var(--gd)'};font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;cursor:${isDone?'default':'pointer'};transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:3px;`;
+    btn.innerHTML=`<span style="font-size:1.3rem;">${isDone?'✅':'📍'}</span><span>Post ${i+1}</span><span style="font-size:.65rem;opacity:.75;">${p.tasks.length} oppg.</span>`;
+    if(!isDone){
+      btn.onmouseover=()=>{btn.style.background='var(--gp)';};
+      btn.onmouseout=()=>{btn.style.background='#fff';};
+      btn.onclick=()=>openPost(i);
+    }
+    grid.appendChild(btn);
+  });
+  const allDone=completedPosts.size>=POSTS.length;
+  document.getElementById('doneAllMsg').style.display=allDone?'block':'none';
+  grid.style.display=allDone?'none':'grid';
+}
+
+function openPost(i){
+  curPost=i;curTask=0;
+  show('s2b');
+  document.getElementById('pwInput').value='';
+  document.getElementById('postLabel').textContent='Post '+(i+1);
+  showErr('e2',false);
+}
+
+function checkPw(){
+  const val=document.getElementById('pwInput').value.trim().toUpperCase();
+  const exp=(POSTS[curPost].password||'').toUpperCase();
+  if(val===exp){showErr('e2',false);showQ();}
+  else{showErr('e2',true);document.getElementById('pwInput').select();}
+}
+
+function showQ(){
+  const p=POSTS[curPost],t=p.tasks[curTask],total=p.tasks.length;
+  show('s3');selChoice=null;
+  document.getElementById('qNum').textContent=curPost+1;
+  document.getElementById('qTitle').textContent='Post '+(curPost+1);
+  document.getElementById('qSubTitle').textContent=total>1?'Oppgave '+(curTask+1)+' av '+total:'Skriv svaret ditt';
+  const dotsEl=document.getElementById('taskDots');
+  dotsEl.innerHTML='';
+  if(total>1){
+    for(let d=0;d<total;d++){const dot=document.createElement('div');dot.className='task-dot'+(d<curTask?' done':d===curTask?' active':'');dotsEl.appendChild(dot);}
+    dotsEl.style.display='flex';
+  } else {dotsEl.style.display='none';}
+  const diffs={easy:['diff-easy','🟢 Lett'],medium:['diff-medium','🟡 Middels'],hard:['diff-hard','🔴 Vanskelig']};
+  const d=diffs[t.difficulty]||diffs.easy;
+  const tag=document.getElementById('diffTag');tag.className='diff-tag '+d[0];tag.textContent=d[1];
+  document.getElementById('qText').textContent=t.question;
+  const ca=document.getElementById('choicesArea'),fa=document.getElementById('freeArea');
+  if(t.type==='multiple'){
+    fa.style.display='none';ca.innerHTML='';
+    (t.choices||[]).forEach((ch,i)=>{
+      const b=document.createElement('button');b.className='choice';b.textContent=['A','B','C','D'][i]+'. '+ch;
+      b.onclick=()=>{document.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selChoice=i;showErr('e3',false);};
+      ca.appendChild(b);
+    });
+  } else {
+    ca.innerHTML='';fa.style.display='block';document.getElementById('freeAns').value='';
+  }
+  const isLast=curTask>=total-1;
+  const nb=document.getElementById('nextBtn');
+  nb.textContent=isLast?'FULLFØR POST ✅':'NESTE OPPGAVE ➡️';
+  nb.onclick=submitAns;
+  showErr('e3',false);
+}
+
+function submitAns(){
+  const p=POSTS[curPost],t=p.tasks[curTask];
+  if(t.type==='multiple'){
+    if(selChoice===null){showErr('e3',true);return;}
+    curSession.answers.push({postIndex:curPost,taskIndex:curTask,question:t.question,given:t.choices[selChoice],correct:t.choices[t.correct],isCorrect:selChoice===t.correct,type:'multiple'});
+  } else {
+    const ans=document.getElementById('freeAns').value.trim();
+    if(!ans){showErr('e3',true);return;}
+    curSession.answers.push({postIndex:curPost,taskIndex:curTask,question:t.question,given:ans,correct:'(fritekst)',isCorrect:null,type:'free'});
+  }
+  curTask++;
+  if(curTask<p.tasks.length){showQ();}
+  else{completedPosts.add(curPost);showPostPicker();}
+}
+
+async function done(){
+  await sendToDiscord(curSession);
+  show('s4');
+  const ok=curSession.answers.filter(a=>a.isCorrect===true).length;
+  const tot=curSession.answers.filter(a=>a.isCorrect!==null).length;
+  document.getElementById('finSummary').innerHTML=
+    `<strong>Lag:</strong> ${esc(teamName)}<br>`+
+    `<strong>Deltakere:</strong> ${members.map(esc).join(', ')}<br>`+
+    `<strong>Poster fullført:</strong> ${POSTS.length}/${POSTS.length} 🌟<br>`+
+    `<strong>Riktige svar (flervalg):</strong> ${ok}/${tot}`;
+  const fs=document.getElementById('finStars');fs.innerHTML='';
+  for(let i=0;i<POSTS.length;i++){const s=document.createElement('span');s.className='star lit';s.textContent='⭐';fs.appendChild(s);}
+}
+
+async function sendToDiscord(session){
+  const ok=session.answers.filter(a=>a.isCorrect===true).length;
+  const tot=session.answers.filter(a=>a.isCorrect!==null).length;
+  let lines='';
+  session.answers.forEach(a=>{
+    const icon=a.isCorrect===true?'✅':a.isCorrect===false?'❌':'✏️';
+    lines+=`${icon} **Post ${a.postIndex+1} – Oppg.${a.taskIndex+1}:** ${a.given}\n`;
+  });
+  const embed={
+    title:'🏆 '+session.team+' har fullført Naturstien!',
+    color:0x40916c,
+    fields:[
+      {name:'👥 Deltakere',value:session.members.join(', '),inline:true},
+      {name:'🕐 Tidspunkt',value:session.timestamp,inline:true},
+      {name:'🎯 Resultat',value:ok+'/'+tot+' riktige (flervalg)',inline:true},
+      {name:'📋 Alle svar',value:lines||'Ingen svar'}
+    ],
+    footer:{text:'Naturstien · Leirskolen'}
+  };
+  try{await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[embed]})});}
+  catch(e){console.error('Discord feil:',e);}
+}
+
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function showErr(id,v){document.getElementById(id).classList.toggle('show',v);}
+function addMember(){const r=document.createElement('div');r.className='member-row';r.innerHTML='<input type="text" placeholder="Navn" class="mi" maxlength="25"><button class="rm-btn" onclick="rmMember(this)">✕</button>';document.getElementById('memberList').appendChild(r);}
+function rmMember(btn){if(document.querySelectorAll('.member-row').length>1)btn.parentElement.remove();}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+</script>
+</body>
+</html>
