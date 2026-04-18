@@ -221,63 +221,63 @@ hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
 <script>
 const POSTS = [
 {
-  password:"Skog",
+password:"Skog",
+tasks:[
+  {type:"multiple",difficulty:"Lett",question:"Hva heter treet som lager eikenøtter?",choices:["Bjørk","Eik","Gran","Furu"],correct:1},
+  {type:"multiple",difficulty:"Lett",question:"Hvem synger 'Let it go' i Frost?",choices:["Anna","Ella","Elsa","Julia"],correct:2},
+  {type:"free",difficulty:"Medium",question:"Nevn tre ting du kan finne i en skog."}
+]
+},
+{
+  password:"Leirskole",
   tasks:[
-    {type:"multiple",difficulty:"Lett",question:"Hva heter treet som lager runde, brune eikenøtter?",choices:["Bjørk","Eik","Gran","Furu"],correct:1},
-    {type:"multiple",difficulty:"Lett",question:"Hvem synger 'Let it go' i Frost-filmen?",choices:["Anna","Ella","Elsa","Julia"],correct:2},
-    {type:"free",difficulty:"Vannskelig",question:"Hva spiser en pinnsvin?"}
+    {type:"multiple",difficulty:"Medium",question:"Hvor mange bein har en edderkopp?",choices:["4","6","8","10"],correct:2},
+    {type:"multiple",difficulty:"Lett",question:"Hvem er skogens konge i Norge?",choices:["Løve","Elg","Ape","Gorilla"],correct:1},
+    {type:"free",difficulty:"Medium",question:"Hva er tre smarte ting å ha med på tur?"}
   ]
 },
-  {
-    password:"Leirskole",
-    tasks:[
-      {type:"multiple",difficulty:"Medium",question:"Hvilken av disse er en giftig sopp?",choices:["Kantarell","Sjampinjong","Rød fluesopp","Traktkantarell"],correct:2},
-      {type:"multiple",difficulty:"Lett",question:"Hvem er skogens konge?",choices:["Løve","Elg","Ape","Gorilla"],correct:1},
-      {type:"free",difficulty:"Medium",question:"Finn en sopp eller noe som ligner sopp i nærheten. Beskriv den – form, farge, lukt."}
-    ]
-  },
-  {
-    password:"Konge",
-    tasks:[
-      {type:"multiple",difficulty:"easy",question:"Hva spiser en elg? (velg beste svar)",choices:["Kjøtt og fisk","Kvister, bark og gress","Bare sopp","Bær og nøtter"],correct:1},
-      {type:"multiple",difficulty:"medium",question:"På hvilken side av trærne vokser mose oftest?",choices:["Sørsiden","Nordsiden","Østsiden","Vestsiden"],correct:1},
-      {type:"free",difficulty:"easy",question:"Hva tror dere elgen bruker denne skogen til? Skriv minst to ting."}
-    ]
-  },
-  {
-    password:"Banan",
-    tasks:[
-      {type:"multiple",difficulty:"medium",question:"Hva er spesielt med synet til rovfugler som spurvehauk?",choices:["Ser i mørket","Ser bakover","Ekstremt skarpt fremover","Er fargeblind"],correct:2},
-      {type:"multiple",difficulty:"medium",question:"Gaupen er Norges eneste ville kattedyr. Hva er spesielt med ørene?",choices:["Runde og korte","Lange hårtupper øverst","Foldbare","Usynlige"],correct:1},
-      {type:"free",difficulty:"medium",question:"Hør etter i 30 sekunder. Hvilke lyder hører dere? Skriv ned alt dere oppfatter."}
-    ]
-  },
-  {
-    password:"Tvedt",
-    tasks:[
-      {type:"multiple",difficulty:"hard",question:"Hva kalles prosessen der planter lager mat av sollys og CO₂?",choices:["Respirasjon","Fotosyntese","Pollinering","Evaporasjon"],correct:1},
-      {type:"multiple",difficulty:"hard",question:"Hvordan kan man se ca. hvor gammelt et tre er uten å felle det?",choices:["Telle greiner","Måle høyden","Telle vekstringer","Se på bladform"],correct:2},
-      {type:"free",difficulty:"hard",question:"Finn det største treet dere kan se. Estimer alderen – og forklar hvordan dere kom fram til svaret."}
-    ]
-  },
-  {
-    password:"Storm",
-    tasks:[
-      {type:"free",difficulty:"medium",question:"Hva kalles det når vann fordamper fra bladene til planter? Forklar prosessen med egne ord."}
-    ]
-  },
-  {
-    password:"Sommer",
-    tasks:[
-      {type:"free",difficulty:"medium",question:"Norge har bare én giftig slange. Hva heter den, og hva gjør dere om noen i laget blir bitt?"}
-    ]
-  },
-  {
-    password:"Løve",
-    tasks:[
-      {type:"free",difficulty:"hard",question:"Hva er det kuleste eller rareste dere har opplevd på Naturstien i dag? Beskriv det godt!"}
-    ]
-  }
+{
+  password:"Konge",
+  tasks:[
+    {type:"multiple",difficulty:"Lett",question:"Hva spiser en elg mest av?",choices:["Kjøtt og fisk","Kvister, bark og gress","Bare sopp","Godteri"],correct:1},
+    {type:"multiple",difficulty:"Medium",question:"På hvilken side av trær vokser mose oftest?",choices:["Sørsiden","Nordsiden","Østsiden","Vestsiden"],correct:1},
+    {type:"free",difficulty:"Lett",question:"Hvis du var skogens konge – hva ville du bestemt?"}
+  ]
+},
+{
+  password:"Banan",
+  tasks:[
+    {type:"multiple",difficulty:"Medium",question:"Hva er spesielt med synet til rovfugler?",choices:["Ser i mørket","Ser bakover","Har ekstremt skarpt syn","Er fargeblinde"],correct:2},
+    {type:"multiple",difficulty:"Medium",question:"Hva kjennetegner gaupa?",choices:["Den kan fly","Den har hårtupper på ørene","Den er en fugl","Den lever i havet"],correct:1},
+    {type:"free",difficulty:"Medium",question:"Nevn tre lyder du kan høre i naturen."}
+  ]
+},
+{
+  password:"Tvedt",
+  tasks:[
+    {type:"multiple",difficulty:"Vannskelig",question:"Hva kalles prosessen der planter lager mat av sollys?",choices:["Respirasjon","Fotosyntese","Pollinering","Evaporasjon"],correct:1},
+    {type:"multiple",difficulty:"Vannskelig",question:"Hvordan kan man finne alderen til et tre?",choices:["Telle blader","Måle høyden","Telle årringer","Se på barken"],correct:2},
+    {type:"free",difficulty:"Vannskelig",question:"Hvorfor er trær viktige for mennesker? Nevn minst to grunner."}
+  ]
+},
+{
+  password:"Storm",
+  tasks:[
+    {type:"free",difficulty:"Medium",question:"Nevn tre forskjellige uvær.."}
+  ]
+},
+{
+  password:"Sommer",
+  tasks:[
+    {type:"free",difficulty:"Vannskelig",question:"Hvor mange perler er i denne boksen?"}
+  ]
+},
+{
+  password:"Løve",
+  tasks:[
+    {type:"free",difficulty:"Vannskelig",question:"Hvor langt er denne pinnen?."}
+  ]
+}
 ];
 
 const WEBHOOK = "https://discord.com/api/webhooks/1491538829310693686/tsFmVLbkGyT7riRLgZwgr1_WTj3F42QoGhJPriFVpLqd567xM18M_OYs9uflAbgyBf93";
