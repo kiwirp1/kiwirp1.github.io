@@ -11,8 +11,6 @@
   --od:#b5451b; --om:#e05c28; --ol:#f4956a; --op:#fde8dc;
   --yellow:#f9c74f; --brown:#6b4226; --cream:#fefae0; --red:#e63946;
 }
-
-/* Tema-farger via CSS-klasse på body */
 body { --cd:var(--gd); --cm:var(--gm); --cl:var(--gl); --cp:var(--gp); }
 body.quiz { --cd:var(--od); --cm:var(--om); --cl:var(--ol); --cp:var(--op); }
 
@@ -51,7 +49,7 @@ input[type=text],textarea{
   background:#fff;color:var(--cd);outline:none;margin-bottom:12px;
   transition:border-color .2s,box-shadow .2s;
 }
-input:focus,textarea:focus{border-color:var(--cm);box-shadow:0 0 0 4px rgba(0,0,0,.08);}
+input:focus,textarea:focus{border-color:var(--cm);box-shadow:0 0 0 4px rgba(0,0,0,.07);}
 textarea{resize:none;}
 
 .btn{width:100%;padding:15px;border:none;border-radius:18px;font-family:'Fredoka One',cursive;font-size:1.25rem;cursor:pointer;transition:transform .15s,box-shadow .15s;margin-top:6px;}
@@ -59,8 +57,15 @@ textarea{resize:none;}
 .btn-main:active{box-shadow:0 2px 0 var(--cd);transform:translateY(4px);}
 .btn-yellow{background:var(--yellow);color:var(--brown);box-shadow:0 6px 0 #b8860b;}
 .btn-yellow:active{box-shadow:0 2px 0 #b8860b;transform:translateY(4px);}
-.btn-quiz{background:var(--om);color:#fff;box-shadow:0 6px 0 var(--od);}
-.btn-quiz:active{box-shadow:0 2px 0 var(--od);transform:translateY(4px);}
+
+/* Liten quiz-knapp */
+.btn-quiz-small{
+  width:100%;padding:10px;border:2px solid var(--om);border-radius:14px;
+  background:transparent;color:var(--om);
+  font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;
+  margin-top:8px;transition:all .2s;
+}
+.btn-quiz-small:hover{background:var(--op);}
 
 .err{background:#fde8e8;color:#c0392b;border-radius:12px;padding:10px 14px;font-weight:700;font-size:.88rem;text-align:center;margin-top:6px;display:none;}
 .err.show{display:block;animation:shake .3s;}
@@ -75,46 +80,47 @@ hr{border:none;border-top:2px dashed var(--cl);margin:16px 0;}
 .add-btn{background:none;border:2px dashed var(--cl);border-radius:12px;padding:9px;width:100%;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--cm);cursor:pointer;margin-bottom:12px;transition:all .2s;}
 .add-btn:hover{background:var(--cp);}
 
+/* Natursti spesifikke */
 .prog-wrap{background:rgba(0,0,0,.1);border-radius:99px;height:11px;overflow:hidden;margin:8px 0 4px;}
 .prog-fill{height:100%;background:linear-gradient(90deg,var(--cm),var(--cl));border-radius:99px;transition:width .5s;}
 .prog-txt{font-size:.78rem;font-weight:700;color:var(--cm);text-align:right;}
-
 .post-badge{display:flex;align-items:center;gap:10px;background:var(--cp);border-radius:14px;padding:10px 14px;margin-bottom:14px;}
 .post-num{background:var(--cm);color:#fff;font-family:'Fredoka One',cursive;font-size:1.3rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-
 .task-dots{display:flex;gap:6px;margin-bottom:12px;justify-content:center;}
 .task-dot{width:10px;height:10px;border-radius:50%;background:#ddd;transition:background .3s;}
 .task-dot.done{background:var(--cm);}
 .task-dot.active{background:var(--yellow);box-shadow:0 0 0 3px rgba(249,199,79,.3);}
-
 .q-box{background:#fff;border-radius:18px;padding:16px;border:3px solid var(--cp);margin-bottom:14px;}
 .q-text{font-size:1.1rem;font-weight:800;color:var(--cd);line-height:1.4;margin-bottom:12px;}
 .diff-tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:99px;margin-bottom:8px;}
 .diff-easy{background:#d8f3dc;color:#2d6a4f}
 .diff-medium{background:#fff3cd;color:#856404}
 .diff-hard{background:#fde8e8;color:#c0392b}
-
 .choices{display:flex;flex-direction:column;gap:8px;}
 .choice{width:100%;text-align:left;padding:11px 14px;border:3px solid var(--cp);border-radius:13px;background:#fff;font-family:'Nunito',sans-serif;font-size:.98rem;font-weight:700;color:var(--cd);cursor:pointer;transition:all .2s;}
 .choice:hover{border-color:var(--cl);background:var(--cp);}
 .choice.selected{border-color:var(--cm);background:var(--cp);}
 
-.stars{display:flex;justify-content:center;gap:3px;margin:8px 0;flex-wrap:wrap;}
-.star{font-size:1rem;opacity:.2;transition:opacity .3s;}
-.star.lit{opacity:1;}
+/* Quiz spesifikke */
+.quiz-page{min-height:100vh;padding:24px 16px 40px;position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;}
+.quiz-header{background:var(--cream);border-radius:22px;padding:18px 22px;max-width:480px;width:100%;border:4px solid var(--cl);box-shadow:0 6px 30px rgba(0,0,0,.3);margin-bottom:16px;text-align:center;}
+.quiz-header .title{font-size:2rem;}
+.quiz-q-card{background:var(--cream);border-radius:18px;padding:16px 18px;max-width:480px;width:100%;border:3px solid var(--cl);box-shadow:0 4px 16px rgba(0,0,0,.18);margin-bottom:12px;}
+.quiz-q-num{font-family:'Fredoka One',cursive;font-size:.85rem;color:var(--cm);margin-bottom:4px;}
+.quiz-q-text{font-size:1rem;font-weight:800;color:var(--cd);margin-bottom:8px;line-height:1.4;}
+.quiz-q-card textarea{margin-bottom:0;font-size:.95rem;padding:10px 12px;border-radius:10px;}
+.quiz-submit-wrap{max-width:480px;width:100%;margin-top:8px;}
 
-.lock{font-size:2.6rem;text-align:center;display:block;animation:pulse 2s ease infinite;}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.stars{display:flex;justify-content:center;gap:3px;margin:8px 0;flex-wrap:wrap;}
+.star{font-size:1rem;opacity:.2;}
+.star.lit{opacity:1;}
 .trophy{font-size:5rem;display:block;text-align:center;animation:bounce 1s ease infinite;}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.lock{font-size:2.6rem;text-align:center;display:block;animation:pulse 2s ease infinite;}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 
 .screen{display:none;}
 .screen.active{display:block;}
-
-/* Modusvelger på hjemmesiden */
-.mode-divider{display:flex;align-items:center;gap:8px;margin:14px 0 6px;}
-.mode-divider span{font-size:.75rem;font-weight:700;color:#aaa;white-space:nowrap;}
-.mode-divider hr{flex:1;border-top:1px dashed #ccc;margin:0;}
 </style>
 </head>
 <body>
@@ -129,9 +135,9 @@ hr{border:none;border-top:2px dashed var(--cl);margin:16px 0;}
 <div id="s1" class="screen active">
   <div class="page">
     <div class="card">
-      <span class="emoji-big" id="homeEmoji">🌿</span>
-      <div class="title" id="homeTitle">Naturstien</div>
-      <div class="subtitle" id="homeSub">Familiekonkurransen</div>
+      <span class="emoji-big">🌿</span>
+      <div class="title">Naturstien</div>
+      <div class="subtitle">Familiekonkurransen</div>
       <hr>
       <label class="lbl">🏷️ Lagnavn</label>
       <input type="text" id="teamName" placeholder="t.d. «De Raske Røtter»" maxlength="30">
@@ -142,21 +148,19 @@ hr{border:none;border-top:2px dashed var(--cl);margin:16px 0;}
       </div>
       <button class="add-btn" onclick="addMember()">＋ Legg til person</button>
       <div class="err" id="e1">Fyll inn lagnavn og minst ett navn!</div>
-      <button class="btn btn-main" onclick="startGame()">🌲 SPILL NATURSTIEN!</button>
-
-      <div class="mode-divider"><hr><span>eller</span><hr></div>
-      <button class="btn btn-quiz" onclick="startQuiz()">🧠 QUIZ — Samfunn, by & vanlig quiz</button>
+      <button class="btn btn-main" onclick="startNatur()">🌲 SPILL NATURSTIEN!</button>
+      <button class="btn-quiz-small" onclick="startQuiz()">🧠 Quiz — samfunn, by & vanlig</button>
     </div>
   </div>
 </div>
 
-<!-- S2: Post Picker -->
+<!-- S2: Natursti Post Picker -->
 <div id="s2" class="screen">
   <div class="page" style="justify-content:flex-start;padding-top:28px;">
     <div class="card" style="max-width:480px;">
       <div style="text-align:center;margin-bottom:4px;">
-        <span style="font-size:2rem;" id="pickerEmoji">🗺️</span>
-        <div class="title" style="font-size:1.6rem;" id="pickerTitle">Velg en post!</div>
+        <span style="font-size:2rem;">🗺️</span>
+        <div class="title" style="font-size:1.6rem;">Velg en post!</div>
         <p style="font-size:.82rem;color:#777;font-weight:600;margin-top:4px;">Lag: <strong id="teamLbl" style="color:var(--cd);">–</strong></p>
       </div>
       <div class="prog-wrap"><div class="prog-fill" id="pb1" style="width:0%"></div></div>
@@ -172,7 +176,7 @@ hr{border:none;border-top:2px dashed var(--cl);margin:16px 0;}
   </div>
 </div>
 
-<!-- S2b: Password -->
+<!-- S2b: Natursti Password -->
 <div id="s2b" class="screen">
   <div class="page">
     <div class="card">
@@ -192,7 +196,7 @@ hr{border:none;border-top:2px dashed var(--cl);margin:16px 0;}
   </div>
 </div>
 
-<!-- S3: Question -->
+<!-- S3: Natursti Question -->
 <div id="s3" class="screen">
   <div class="page">
     <div class="card">
@@ -218,13 +222,30 @@ hr{border:none;border-top:2px dashed var(--cl);margin:16px 0;}
   </div>
 </div>
 
+<!-- S5: Quiz — alle spørsmål nedover -->
+<div id="s5" class="screen">
+  <div class="quiz-page">
+    <div class="quiz-header">
+      <div style="font-size:2rem;">🧠</div>
+      <div class="title">Quiz</div>
+      <div class="subtitle" style="font-size:1.1rem;">Samfunn, by &amp; vanlig quiz</div>
+      <p style="font-size:.8rem;color:#888;margin-top:6px;">Lag: <strong id="quizTeamLbl" style="color:var(--cd);">–</strong></p>
+    </div>
+    <div id="quizQuestions"></div>
+    <div class="quiz-submit-wrap">
+      <div class="err" id="e5">Fyll inn alle svarene før du sender!</div>
+      <button class="btn btn-main" onclick="submitQuiz()">📨 SEND INN SVARENE</button>
+    </div>
+  </div>
+</div>
+
 <!-- S4: Done -->
 <div id="s4" class="screen">
   <div class="page">
     <div class="card" style="text-align:center;">
       <span class="trophy">🏆</span>
       <div class="title" style="margin-top:8px;">Gratulerer!</div>
-      <div class="subtitle" id="doneSubtitle">🎉 Naturstien fullført! 🎉</div>
+      <div class="subtitle" id="doneSubtitle">🎉 Fullført! 🎉</div>
       <hr>
       <div style="background:var(--cp);border-radius:13px;padding:13px;margin:8px 0;text-align:left;" id="finSummary"></div>
       <p style="font-size:.92rem;font-weight:700;color:#555;margin-top:8px;line-height:1.5;text-align:center;" id="finMsg"></p>
@@ -282,147 +303,155 @@ const NATUR_POSTS = [
   },
   {
     password:"Storm",
-    tasks:[
-      {type:"free",difficulty:"medium",question:"Nevn tre forskjellige uvær."}
-    ]
+    tasks:[{type:"free",difficulty:"medium",question:"Nevn tre forskjellige uvær."}]
   },
   {
     password:"Sommer",
-    tasks:[
-      {type:"free",difficulty:"hard",question:"Hvor mange perler er i denne boksen?"}
-    ]
+    tasks:[{type:"free",difficulty:"hard",question:"Hvor mange perler er i denne boksen?"}]
   },
   {
     password:"Løve",
-    tasks:[
-      {type:"free",difficulty:"hard",question:"Hvor langt er denne pinnen?"}
-    ]
+    tasks:[{type:"free",difficulty:"hard",question:"Hvor langt er denne pinnen?"}]
   }
 ];
 
 // ══════════════════════════════════════
-// QUIZ — poster
+// QUIZ — spørsmål (alle vises på én gang)
 // ══════════════════════════════════════
-const QUIZ_POSTS = [
-  {
-    password:"BY1",
-    tasks:[
-      {type:"multiple",difficulty:"easy",question:"Hva er hovedstaden i Norge?",choices:["Bergen","Stavanger","Oslo","Trondheim"],correct:2},
-      {type:"multiple",difficulty:"easy",question:"Hvilken by er kjent for Eiffeltårnet?",choices:["Roma","Berlin","Madrid","Paris"],correct:3},
-      {type:"free",difficulty:"easy",question:"Nevn tre land i Skandinavia."}
-    ]
-  },
-  {
-    password:"BY2",
-    tasks:[
-      {type:"multiple",difficulty:"easy",question:"Hva heter den lengste elven i verden?",choices:["Amazonas","Nilen","Mississippi","Yangtze"],correct:1},
-      {type:"multiple",difficulty:"medium",question:"Hvilken by er kjent som 'The Big Apple'?",choices:["Los Angeles","Chicago","New York","Miami"],correct:2},
-      {type:"free",difficulty:"medium",question:"Hva heter de fem verdensdelen? Nevn alle."}
-    ]
-  },
-  {
-    password:"BY3",
-    tasks:[
-      {type:"multiple",difficulty:"medium",question:"Hva er valutaen i Japan?",choices:["Yuan","Yen","Won","Baht"],correct:1},
-      {type:"multiple",difficulty:"medium",question:"Hvilket land har flest innbyggere?",choices:["USA","India","Kina","Brasil"],correct:1},
-      {type:"free",difficulty:"medium",question:"Nevn tre kjente landemerker i verden."}
-    ]
-  },
-  {
-    password:"SAM1",
-    tasks:[
-      {type:"multiple",difficulty:"easy",question:"Hvor mange måneder er det i et år?",choices:["10","11","12","13"],correct:2},
-      {type:"multiple",difficulty:"easy",question:"Hva er 7 × 8?",choices:["54","56","58","64"],correct:1},
-      {type:"free",difficulty:"easy",question:"Nevn tre ting du gjør hver morgen."}
-    ]
-  },
-  {
-    password:"SAM2",
-    tasks:[
-      {type:"multiple",difficulty:"medium",question:"Hvem malte Mona Lisa?",choices:["Picasso","Michelangelo","Leonardo da Vinci","Rembrandt"],correct:2},
-      {type:"multiple",difficulty:"medium",question:"Hva er det raskeste landlevende dyret?",choices:["Løve","Gepard","Hest","Gaselle"],correct:1},
-      {type:"free",difficulty:"medium",question:"Hva er forskjellen på en by og en bygd? Forklar med egne ord."}
-    ]
-  },
-  {
-    password:"SAM3",
-    tasks:[
-      {type:"free",difficulty:"medium",question:"Hva heter presidenten i USA akkurat nå?"}
-    ]
-  },
-  {
-    password:"SAM4",
-    tasks:[
-      {type:"free",difficulty:"hard",question:"Hva heter de tre statsmaktene i Norge?"}
-    ]
-  },
-  {
-    password:"SAM5",
-    tasks:[
-      {type:"free",difficulty:"hard",question:"Nevn fem land som grenser til Russland."}
-    ]
-  }
+const QUIZ_QUESTIONS = [
+  "Hva er hovedstaden i Australia?",
+  "Hvor mange land er det i Afrika?",
+  "Hva heter den lengste elven i verden?",
+  "Hvilken by er kjent som 'The Big Apple'?",
+  "Hva er valutaen i Japan?",
+  "Hvilket land har flest innbyggere?",
+  "Hvem malte Mona Lisa?",
+  "Hva er det raskeste landlevende dyret?",
+  "Hva heter de tre statsmaktene i Norge?",
+  "Nevn fem land som grenser til Russland.",
+  "Hva heter presidenten i USA akkurat nå?",
+  "Hva er arealet til Norge i km²? (ca.)",
+  "Hvilken planet er størst i solsystemet?",
+  "Hva heter havet mellom Europa og Amerika?",
+  "I hvilket år ble FN grunnlagt?"
 ];
 
 const WEBHOOK_NATUR = "https://discord.com/api/webhooks/1491538829310693686/tsFmVLbkGyT7riRLgZwgr1_WTj3F42QoGhJPriFVpLqd567xM18M_OYs9uflAbgyBf93";
 const WEBHOOK_QUIZ  = "https://discord.com/api/webhooks/1494860389173952624/YD5gB2dfMzGOThYisABb09YWquc-OnU9_WXl7fM48khUJ1msgqHB118HiDHRRNFNI374";
 
 // ══════════════════════════════════════
-// GAME STATE
+// GAME STATE — Natursti
 // ══════════════════════════════════════
-let mode='natur'; // 'natur' | 'quiz'
-let POSTS = NATUR_POSTS;
-let WEBHOOK = WEBHOOK_NATUR;
 let teamName='', members=[], curPost=0, curTask=0, selChoice=null, curSession=null;
 let completedPosts=new Set();
 
-function setMode(m){
-  mode = m;
-  POSTS   = m==='quiz' ? QUIZ_POSTS   : NATUR_POSTS;
-  WEBHOOK = m==='quiz' ? WEBHOOK_QUIZ : WEBHOOK_NATUR;
-  if(m==='quiz'){
-    document.body.classList.add('quiz');
-  } else {
-    document.body.classList.remove('quiz');
-  }
-}
-
-function startGame(){
-  setMode('natur');
-  _start();
-}
-function startQuiz(){
-  setMode('quiz');
-  _start();
-}
-
-function _start(){
+function getInfo(){
   teamName=document.getElementById('teamName').value.trim();
   members=Array.from(document.querySelectorAll('.mi')).map(i=>i.value.trim()).filter(Boolean);
-  if(!teamName||!members.length){showErr('e1',true);return;}
+  if(!teamName||!members.length){showErr('e1',true);return false;}
   showErr('e1',false);
+  return true;
+}
+
+function startNatur(){
+  if(!getInfo()) return;
+  document.body.classList.remove('quiz');
   curPost=0;curTask=0;selChoice=null;completedPosts=new Set();
   const ts=new Date().toLocaleString('no-NO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  curSession={team:teamName,members:[...members],timestamp:ts,answers:[],mode};
+  curSession={team:teamName,members:[...members],timestamp:ts,answers:[]};
   showPostPicker();
 }
 
+function startQuiz(){
+  if(!getInfo()) return;
+  document.body.classList.add('quiz');
+
+  // Bygg quiz-siden
+  document.getElementById('quizTeamLbl').textContent = teamName;
+  const container = document.getElementById('quizQuestions');
+  container.innerHTML = '';
+  QUIZ_QUESTIONS.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-q-card';
+    card.innerHTML = `
+      <div class="quiz-q-num">Spørsmål ${i+1}</div>
+      <div class="quiz-q-text">${q}</div>
+      <textarea id="qa${i}" placeholder="Skriv svaret ditt her..." rows="2"></textarea>
+    `;
+    container.appendChild(card);
+  });
+  show('s5');
+}
+
+async function submitQuiz(){
+  // Sjekk at alle er fylt inn
+  const answers = [];
+  let allFilled = true;
+  QUIZ_QUESTIONS.forEach((q, i) => {
+    const val = document.getElementById('qa'+i).value.trim();
+    if(!val) allFilled = false;
+    answers.push({q, a: val});
+  });
+  if(!allFilled){ showErr('e5',true); return; }
+  showErr('e5',false);
+
+  // Send til Discord
+  const ts = new Date().toLocaleString('no-NO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  let lines = '';
+  answers.forEach((x,i) => { lines += `**${i+1}. ${x.q}**\n✏️ ${x.a}\n\n`; });
+
+  // Discord har maks 1024 tegn per field — del opp om nødvendig
+  const chunks = [];
+  let cur = '';
+  lines.split('\n\n').forEach(block => {
+    if((cur+block+'\n\n').length > 900){ chunks.push(cur.trim()); cur = block+'\n\n'; }
+    else { cur += block+'\n\n'; }
+  });
+  if(cur.trim()) chunks.push(cur.trim());
+
+  const fields = [
+    {name:'👥 Deltakere', value:members.join(', '), inline:true},
+    {name:'🕐 Tidspunkt', value:ts, inline:true},
+  ];
+  chunks.forEach((chunk, i) => {
+    fields.push({name: i===0 ? '📋 Alle svar' : '📋 Svar (forts.)', value: chunk});
+  });
+
+  const embed = {
+    title: `🧠 ${teamName} har levert quizen!`,
+    color: 0xe05c28,
+    fields,
+    footer:{text:'Leirskolen · Quiz'}
+  };
+
+  try {
+    await fetch(WEBHOOK_QUIZ, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({embeds:[embed]})});
+  } catch(e){ console.error('Discord feil:',e); }
+
+  // Vis done-skjerm
+  document.getElementById('doneSubtitle').textContent = '🧠 Quiz levert!';
+  document.getElementById('finMsg').textContent = 'Bra jobba! Svarene er sendt inn og blir annonsert i løpet av kvelden 😄';
+  document.getElementById('finSummary').innerHTML =
+    `<strong>Lag:</strong> ${esc(teamName)}<br>`+
+    `<strong>Deltakere:</strong> ${members.map(esc).join(', ')}<br>`+
+    `<strong>Spørsmål besvart:</strong> ${QUIZ_QUESTIONS.length}/${QUIZ_QUESTIONS.length} 🌟`;
+  const fs=document.getElementById('finStars');fs.innerHTML='';
+  for(let i=0;i<QUIZ_QUESTIONS.length&&i<20;i++){const s=document.createElement('span');s.className='star lit';s.textContent='⭐';fs.appendChild(s);}
+  show('s4');
+}
+
+// ══════════════════════════════════════
+// NATURSTI LOGIKK
+// ══════════════════════════════════════
 function showPostPicker(){
   show('s2');
-  if(mode==='quiz'){
-    document.getElementById('pickerEmoji').textContent='🧠';
-    document.getElementById('pickerTitle').textContent='Velg en quizpost!';
-  } else {
-    document.getElementById('pickerEmoji').textContent='🗺️';
-    document.getElementById('pickerTitle').textContent='Velg en post!';
-  }
   document.getElementById('teamLbl').textContent=teamName;
   const done=completedPosts.size;
-  document.getElementById('pb1').style.width=(done/POSTS.length*100)+'%';
-  document.getElementById('pt1').textContent=done+' / '+POSTS.length+' poster fullført';
+  document.getElementById('pb1').style.width=(done/NATUR_POSTS.length*100)+'%';
+  document.getElementById('pt1').textContent=done+' / '+NATUR_POSTS.length+' poster fullført';
   const grid=document.getElementById('postGrid');
   grid.innerHTML='';
-  POSTS.forEach((p,i)=>{
+  NATUR_POSTS.forEach((p,i)=>{
     const isDone=completedPosts.has(i);
     const btn=document.createElement('button');
     btn.style.cssText=`padding:12px 4px;border-radius:16px;border:3px solid ${isDone?'var(--cm)':'var(--cl)'};background:${isDone?'var(--cm)':'#fff'};color:${isDone?'#fff':'var(--cd)'};font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;cursor:${isDone?'default':'pointer'};transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:3px;`;
@@ -434,7 +463,7 @@ function showPostPicker(){
     }
     grid.appendChild(btn);
   });
-  const allDone=completedPosts.size>=POSTS.length;
+  const allDone=completedPosts.size>=NATUR_POSTS.length;
   document.getElementById('doneAllMsg').style.display=allDone?'block':'none';
   grid.style.display=allDone?'none':'grid';
 }
@@ -449,13 +478,13 @@ function openPost(i){
 
 function checkPw(){
   const val=document.getElementById('pwInput').value.trim().toUpperCase();
-  const exp=(POSTS[curPost].password||'').toUpperCase();
+  const exp=(NATUR_POSTS[curPost].password||'').toUpperCase();
   if(val===exp){showErr('e2',false);showQ();}
   else{showErr('e2',true);document.getElementById('pwInput').select();}
 }
 
 function showQ(){
-  const p=POSTS[curPost],t=p.tasks[curTask],total=p.tasks.length;
+  const p=NATUR_POSTS[curPost],t=p.tasks[curTask],total=p.tasks.length;
   show('s3');selChoice=null;
   document.getElementById('qNum').textContent=curPost+1;
   document.getElementById('qTitle').textContent='Post '+(curPost+1);
@@ -489,7 +518,7 @@ function showQ(){
 }
 
 function submitAns(){
-  const p=POSTS[curPost],t=p.tasks[curTask];
+  const p=NATUR_POSTS[curPost],t=p.tasks[curTask];
   if(t.type==='multiple'){
     if(selChoice===null){showErr('e3',true);return;}
     curSession.answers.push({postIndex:curPost,taskIndex:curTask,question:t.question,given:t.choices[selChoice],correct:t.choices[t.correct],isCorrect:selChoice===t.correct,type:'multiple'});
@@ -504,47 +533,38 @@ function submitAns(){
 }
 
 async function done(){
-  await sendToDiscord(curSession);
-  show('s4');
+  const ts=new Date().toLocaleString('no-NO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
   const ok=curSession.answers.filter(a=>a.isCorrect===true).length;
   const tot=curSession.answers.filter(a=>a.isCorrect!==null).length;
-  document.getElementById('doneSubtitle').textContent = mode==='quiz'
-    ? '🎉 Quiz fullført! 🎉'
-    : '🎉 Naturstien fullført! 🎉';
-  document.getElementById('finMsg').textContent = mode==='quiz'
-    ? '🧠 Bra jobba! Resultatene blir annonsert i løpet av kvelden! 😄'
-    : '🌲 Dere har nå fullført Naturstien. Svar blir annonsert i løpet av kvelden! 😄';
-  document.getElementById('finSummary').innerHTML=
-    `<strong>Lag:</strong> ${esc(teamName)}<br>`+
-    `<strong>Deltakere:</strong> ${members.map(esc).join(', ')}<br>`+
-    `<strong>Poster fullført:</strong> ${POSTS.length}/${POSTS.length} 🌟<br>`+
-    `<strong>Riktige svar (flervalg):</strong> ${ok}/${tot}`;
-  const fs=document.getElementById('finStars');fs.innerHTML='';
-  for(let i=0;i<POSTS.length;i++){const s=document.createElement('span');s.className='star lit';s.textContent='⭐';fs.appendChild(s);}
-}
-
-async function sendToDiscord(session){
-  const ok=session.answers.filter(a=>a.isCorrect===true).length;
-  const tot=session.answers.filter(a=>a.isCorrect!==null).length;
   let lines='';
-  session.answers.forEach(a=>{
+  curSession.answers.forEach(a=>{
     const icon=a.isCorrect===true?'✅':a.isCorrect===false?'❌':'✏️';
     lines+=`${icon} **Post ${a.postIndex+1} – Oppg.${a.taskIndex+1}:** ${a.given}\n`;
   });
-  const label = session.mode==='quiz' ? '🧠 Quiz' : '🌿 Naturstien';
   const embed={
-    title:`🏆 ${session.team} har fullført ${label}!`,
-    color: session.mode==='quiz' ? 0xe05c28 : 0x40916c,
+    title:`🏆 ${teamName} har fullført Naturstien!`,
+    color:0x40916c,
     fields:[
-      {name:'👥 Deltakere',value:session.members.join(', '),inline:true},
-      {name:'🕐 Tidspunkt',value:session.timestamp,inline:true},
+      {name:'👥 Deltakere',value:members.join(', '),inline:true},
+      {name:'🕐 Tidspunkt',value:ts,inline:true},
       {name:'🎯 Resultat',value:ok+'/'+tot+' riktige (flervalg)',inline:true},
       {name:'📋 Alle svar',value:lines||'Ingen svar'}
     ],
-    footer:{text:'Leirskolen · '+label}
+    footer:{text:'Leirskolen · Naturstien'}
   };
-  try{await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[embed]})});}
+  try{await fetch(WEBHOOK_NATUR,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[embed]})});}
   catch(e){console.error('Discord feil:',e);}
+
+  document.getElementById('doneSubtitle').textContent='🎉 Naturstien fullført! 🎉';
+  document.getElementById('finMsg').textContent='🌲 Dere har nå fullført Naturstien. Svar blir annonsert i løpet av kvelden! 😄';
+  document.getElementById('finSummary').innerHTML=
+    `<strong>Lag:</strong> ${esc(teamName)}<br>`+
+    `<strong>Deltakere:</strong> ${members.map(esc).join(', ')}<br>`+
+    `<strong>Poster fullført:</strong> ${NATUR_POSTS.length}/${NATUR_POSTS.length} 🌟<br>`+
+    `<strong>Riktige svar (flervalg):</strong> ${ok}/${tot}`;
+  const fs=document.getElementById('finStars');fs.innerHTML='';
+  for(let i=0;i<NATUR_POSTS.length;i++){const s=document.createElement('span');s.className='star lit';s.textContent='⭐';fs.appendChild(s);}
+  show('s4');
 }
 
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
