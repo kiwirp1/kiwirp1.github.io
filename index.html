@@ -86,7 +86,8 @@ hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
 .choices{display:flex;flex-direction:column;gap:8px;}
 .choice{width:100%;text-align:left;padding:11px 14px;border:3px solid var(--gp);border-radius:13px;background:#fff;font-family:'Nunito',sans-serif;font-size:.98rem;font-weight:700;color:var(--gd);cursor:pointer;transition:all .2s;}
 .choice:hover{border-color:var(--gl);background:var(--gp);}
-.choice.selected{border-color:var(--gm);background:#b7e4c7;}
+/* selected = blue-ish neutral, NOT green, to avoid hinting at correctness */
+.choice.selected{border-color:#4a90d9;background:#ddeeff;color:#1a3a5c;}
 
 .stars{display:flex;justify-content:center;gap:3px;margin:8px 0;flex-wrap:wrap;}
 .star{font-size:1rem;opacity:.2;transition:opacity .3s;}
@@ -338,7 +339,9 @@ function checkPw(){
 
 function showQ(){
   const p=POSTS[curPost],t=p.tasks[curTask],total=p.tasks.length;
-  show('s3');selChoice=null;
+  show('s3');
+  // Always reset selChoice to null when showing a new question
+  selChoice=null;
   document.getElementById('qNum').textContent=curPost+1;
   document.getElementById('qTitle').textContent='Post '+(curPost+1);
   document.getElementById('qSubTitle').textContent=total>1?'Oppgave '+(curTask+1)+' av '+total:'Skriv svaret ditt';
@@ -348,16 +351,29 @@ function showQ(){
     for(let d=0;d<total;d++){const dot=document.createElement('div');dot.className='task-dot'+(d<curTask?' done':d===curTask?' active':'');dotsEl.appendChild(dot);}
     dotsEl.style.display='flex';
   } else {dotsEl.style.display='none';}
-  const diffs={easy:['diff-easy','🟢 Lett'],medium:['diff-medium','🟡 Middels'],hard:['diff-hard','🔴 Vanskelig']};
-  const d=diffs[t.difficulty]||diffs.easy;
+  const diffMap={
+    'Lett':['diff-easy','🟢 Lett'],
+    'Medium':['diff-medium','🟡 Middels'],
+    'Vannskelig':['diff-hard','🔴 Vanskelig']
+  };
+  const d=diffMap[t.difficulty]||diffMap['Lett'];
   const tag=document.getElementById('diffTag');tag.className='diff-tag '+d[0];tag.textContent=d[1];
   document.getElementById('qText').textContent=t.question;
   const ca=document.getElementById('choicesArea'),fa=document.getElementById('freeArea');
   if(t.type==='multiple'){
-    fa.style.display='none';ca.innerHTML='';
+    fa.style.display='none';
+    // Rebuild choice buttons fresh each time (no lingering .selected class)
+    ca.innerHTML='';
     (t.choices||[]).forEach((ch,i)=>{
-      const b=document.createElement('button');b.className='choice';b.textContent=['A','B','C','D'][i]+'. '+ch;
-      b.onclick=()=>{document.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selChoice=i;showErr('e3',false);};
+      const b=document.createElement('button');
+      b.className='choice';
+      b.textContent=['A','B','C','D'][i]+'. '+ch;
+      b.onclick=()=>{
+        document.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));
+        b.classList.add('selected');
+        selChoice=i;
+        showErr('e3',false);
+      };
       ca.appendChild(b);
     });
   } else {
@@ -388,13 +404,11 @@ function submitAns(){
 async function done(){
   await sendToDiscord(curSession);
   show('s4');
-  const ok=curSession.answers.filter(a=>a.isCorrect===true).length;
-  const tot=curSession.answers.filter(a=>a.isCorrect!==null).length;
+  // Show only team info — NO score revealed to players
   document.getElementById('finSummary').innerHTML=
     `<strong>Lag:</strong> ${esc(teamName)}<br>`+
     `<strong>Deltakere:</strong> ${members.map(esc).join(', ')}<br>`+
-    `<strong>Poster fullført:</strong> ${POSTS.length}/${POSTS.length} 🌟<br>`+
-    `<strong>Riktige svar (flervalg):</strong> ${ok}/${tot}`;
+    `<strong>Poster fullført:</strong> ${POSTS.length}/${POSTS.length} 🌟`;
   const fs=document.getElementById('finStars');fs.innerHTML='';
   for(let i=0;i<POSTS.length;i++){const s=document.createElement('span');s.className='star lit';s.textContent='⭐';fs.appendChild(s);}
 }
