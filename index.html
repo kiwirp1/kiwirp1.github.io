@@ -8,12 +8,21 @@
 <style>
 :root {
   --gd:#2d6a4f; --gm:#40916c; --gl:#74c69d; --gp:#d8f3dc;
+  --od:#b5451b; --om:#e05c28; --ol:#f4956a; --op:#fde8dc;
   --yellow:#f9c74f; --brown:#6b4226; --cream:#fefae0; --red:#e63946;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Nunito',sans-serif;background:var(--gd);min-height:100vh;overflow-x:hidden;}
 
-.bg{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,#1a4731 0%,#2d6a4f 40%,#40916c 100%);overflow:hidden;}
+/* Tema-farger via CSS-klasse på body */
+body { --cd:var(--gd); --cm:var(--gm); --cl:var(--gl); --cp:var(--gp); }
+body.quiz { --cd:var(--od); --cm:var(--om); --cl:var(--ol); --cp:var(--op); }
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden;}
+
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;}
+body:not(.quiz) .bg{background:linear-gradient(180deg,#1a4731 0%,#2d6a4f 40%,#40916c 100%);}
+body.quiz      .bg{background:linear-gradient(180deg,#7a2e10 0%,#b5451b 40%,#e05c28 100%);}
+
 .tree{position:absolute;bottom:0;opacity:.15;animation:sway 4s ease-in-out infinite;font-size:3rem;}
 .tree:nth-child(1){left:3%;font-size:4rem;animation-delay:0s}
 .tree:nth-child(2){left:12%;font-size:2.5rem;animation-delay:.5s}
@@ -28,65 +37,67 @@ body{font-family:'Nunito',sans-serif;background:var(--gd);min-height:100vh;overf
 @keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
 
 .page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;position:relative;z-index:10;}
-.card{background:var(--cream);border-radius:28px;padding:28px 24px;max-width:420px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.35);border:4px solid var(--gl);}
+.card{background:var(--cream);border-radius:28px;padding:28px 24px;max-width:420px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.35);border:4px solid var(--cl);}
 
-.title{font-family:'Fredoka One',cursive;font-size:2.6rem;color:var(--gd);text-align:center;line-height:1.1;}
-.subtitle{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--gm);text-align:center;margin-top:4px;}
+.title{font-family:'Fredoka One',cursive;font-size:2.6rem;color:var(--cd);text-align:center;line-height:1.1;}
+.subtitle{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--cm);text-align:center;margin-top:4px;}
 .emoji-big{font-size:3.2rem;text-align:center;display:block;margin-bottom:6px;}
-.lbl{font-size:.88rem;font-weight:800;color:var(--gd);margin-bottom:5px;display:block;}
+.lbl{font-size:.88rem;font-weight:800;color:var(--cd);margin-bottom:5px;display:block;}
 .hint{font-size:.8rem;color:#888;text-align:center;margin-top:6px;}
 
 input[type=text],textarea{
-  width:100%;padding:13px 15px;border:3px solid var(--gl);border-radius:14px;
+  width:100%;padding:13px 15px;border:3px solid var(--cl);border-radius:14px;
   font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;
-  background:#fff;color:var(--gd);outline:none;margin-bottom:12px;
+  background:#fff;color:var(--cd);outline:none;margin-bottom:12px;
   transition:border-color .2s,box-shadow .2s;
 }
-input:focus,textarea:focus{border-color:var(--gm);box-shadow:0 0 0 4px rgba(116,198,157,.25);}
+input:focus,textarea:focus{border-color:var(--cm);box-shadow:0 0 0 4px rgba(0,0,0,.08);}
 textarea{resize:none;}
 
 .btn{width:100%;padding:15px;border:none;border-radius:18px;font-family:'Fredoka One',cursive;font-size:1.25rem;cursor:pointer;transition:transform .15s,box-shadow .15s;margin-top:6px;}
-.btn-green{background:var(--gm);color:#fff;box-shadow:0 6px 0 var(--gd);}
-.btn-green:active{box-shadow:0 2px 0 var(--gd);transform:translateY(4px);}
+.btn-main{background:var(--cm);color:#fff;box-shadow:0 6px 0 var(--cd);}
+.btn-main:active{box-shadow:0 2px 0 var(--cd);transform:translateY(4px);}
 .btn-yellow{background:var(--yellow);color:var(--brown);box-shadow:0 6px 0 #b8860b;}
 .btn-yellow:active{box-shadow:0 2px 0 #b8860b;transform:translateY(4px);}
+.btn-quiz{background:var(--om);color:#fff;box-shadow:0 6px 0 var(--od);}
+.btn-quiz:active{box-shadow:0 2px 0 var(--od);transform:translateY(4px);}
 
 .err{background:#fde8e8;color:#c0392b;border-radius:12px;padding:10px 14px;font-weight:700;font-size:.88rem;text-align:center;margin-top:6px;display:none;}
 .err.show{display:block;animation:shake .3s;}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 
-hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
+hr{border:none;border-top:2px dashed var(--cl);margin:16px 0;}
 
 .member-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;}
 .member-row input{margin-bottom:0;flex:1;}
 .rm-btn{background:none;border:2px solid #ddd;border-radius:10px;width:38px;height:46px;cursor:pointer;font-size:1rem;color:#aaa;flex-shrink:0;transition:all .2s;}
 .rm-btn:hover{border-color:var(--red);color:var(--red);}
-.add-btn{background:none;border:2px dashed var(--gl);border-radius:12px;padding:9px;width:100%;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--gm);cursor:pointer;margin-bottom:12px;transition:all .2s;}
-.add-btn:hover{background:var(--gp);}
+.add-btn{background:none;border:2px dashed var(--cl);border-radius:12px;padding:9px;width:100%;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--cm);cursor:pointer;margin-bottom:12px;transition:all .2s;}
+.add-btn:hover{background:var(--cp);}
 
-.prog-wrap{background:rgba(45,106,79,.15);border-radius:99px;height:11px;overflow:hidden;margin:8px 0 4px;}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--gm),var(--gl));border-radius:99px;transition:width .5s;}
-.prog-txt{font-size:.78rem;font-weight:700;color:var(--gm);text-align:right;}
+.prog-wrap{background:rgba(0,0,0,.1);border-radius:99px;height:11px;overflow:hidden;margin:8px 0 4px;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--cm),var(--cl));border-radius:99px;transition:width .5s;}
+.prog-txt{font-size:.78rem;font-weight:700;color:var(--cm);text-align:right;}
 
-.post-badge{display:flex;align-items:center;gap:10px;background:var(--gp);border-radius:14px;padding:10px 14px;margin-bottom:14px;}
-.post-num{background:var(--gm);color:#fff;font-family:'Fredoka One',cursive;font-size:1.3rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.post-badge{display:flex;align-items:center;gap:10px;background:var(--cp);border-radius:14px;padding:10px 14px;margin-bottom:14px;}
+.post-num{background:var(--cm);color:#fff;font-family:'Fredoka One',cursive;font-size:1.3rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 
 .task-dots{display:flex;gap:6px;margin-bottom:12px;justify-content:center;}
 .task-dot{width:10px;height:10px;border-radius:50%;background:#ddd;transition:background .3s;}
-.task-dot.done{background:var(--gm);}
+.task-dot.done{background:var(--cm);}
 .task-dot.active{background:var(--yellow);box-shadow:0 0 0 3px rgba(249,199,79,.3);}
 
-.q-box{background:#fff;border-radius:18px;padding:16px;border:3px solid var(--gp);margin-bottom:14px;}
-.q-text{font-size:1.1rem;font-weight:800;color:var(--gd);line-height:1.4;margin-bottom:12px;}
+.q-box{background:#fff;border-radius:18px;padding:16px;border:3px solid var(--cp);margin-bottom:14px;}
+.q-text{font-size:1.1rem;font-weight:800;color:var(--cd);line-height:1.4;margin-bottom:12px;}
 .diff-tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:99px;margin-bottom:8px;}
-.diff-easy{background:#d8f3dc;color:var(--gd)}
+.diff-easy{background:#d8f3dc;color:#2d6a4f}
 .diff-medium{background:#fff3cd;color:#856404}
 .diff-hard{background:#fde8e8;color:#c0392b}
 
 .choices{display:flex;flex-direction:column;gap:8px;}
-.choice{width:100%;text-align:left;padding:11px 14px;border:3px solid var(--gp);border-radius:13px;background:#fff;font-family:'Nunito',sans-serif;font-size:.98rem;font-weight:700;color:var(--gd);cursor:pointer;transition:all .2s;}
-.choice:hover{border-color:var(--gl);background:var(--gp);}
-.choice.selected{border-color:var(--gm);background:#b7e4c7;}
+.choice{width:100%;text-align:left;padding:11px 14px;border:3px solid var(--cp);border-radius:13px;background:#fff;font-family:'Nunito',sans-serif;font-size:.98rem;font-weight:700;color:var(--cd);cursor:pointer;transition:all .2s;}
+.choice:hover{border-color:var(--cl);background:var(--cp);}
+.choice.selected{border-color:var(--cm);background:var(--cp);}
 
 .stars{display:flex;justify-content:center;gap:3px;margin:8px 0;flex-wrap:wrap;}
 .star{font-size:1rem;opacity:.2;transition:opacity .3s;}
@@ -99,6 +110,11 @@ hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
 
 .screen{display:none;}
 .screen.active{display:block;}
+
+/* Modusvelger på hjemmesiden */
+.mode-divider{display:flex;align-items:center;gap:8px;margin:14px 0 6px;}
+.mode-divider span{font-size:.75rem;font-weight:700;color:#aaa;white-space:nowrap;}
+.mode-divider hr{flex:1;border-top:1px dashed #ccc;margin:0;}
 </style>
 </head>
 <body>
@@ -113,9 +129,9 @@ hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
 <div id="s1" class="screen active">
   <div class="page">
     <div class="card">
-      <span class="emoji-big">🌿</span>
-      <div class="title">Naturstien</div>
-      <div class="subtitle">Familiekonkurransen</div>
+      <span class="emoji-big" id="homeEmoji">🌿</span>
+      <div class="title" id="homeTitle">Naturstien</div>
+      <div class="subtitle" id="homeSub">Familiekonkurransen</div>
       <hr>
       <label class="lbl">🏷️ Lagnavn</label>
       <input type="text" id="teamName" placeholder="t.d. «De Raske Røtter»" maxlength="30">
@@ -126,7 +142,10 @@ hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
       </div>
       <button class="add-btn" onclick="addMember()">＋ Legg til person</button>
       <div class="err" id="e1">Fyll inn lagnavn og minst ett navn!</div>
-      <button class="btn btn-green" onclick="startGame()">🌲 SPILL!</button>
+      <button class="btn btn-main" onclick="startGame()">🌲 SPILL NATURSTIEN!</button>
+
+      <div class="mode-divider"><hr><span>eller</span><hr></div>
+      <button class="btn btn-quiz" onclick="startQuiz()">🧠 QUIZ — Samfunn, by & vanlig quiz</button>
     </div>
   </div>
 </div>
@@ -136,18 +155,18 @@ hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
   <div class="page" style="justify-content:flex-start;padding-top:28px;">
     <div class="card" style="max-width:480px;">
       <div style="text-align:center;margin-bottom:4px;">
-        <span style="font-size:2rem;">🗺️</span>
-        <div class="title" style="font-size:1.6rem;">Velg en post!</div>
-        <p style="font-size:.82rem;color:#777;font-weight:600;margin-top:4px;">Lag: <strong id="teamLbl" style="color:var(--gd);">–</strong></p>
+        <span style="font-size:2rem;" id="pickerEmoji">🗺️</span>
+        <div class="title" style="font-size:1.6rem;" id="pickerTitle">Velg en post!</div>
+        <p style="font-size:.82rem;color:#777;font-weight:600;margin-top:4px;">Lag: <strong id="teamLbl" style="color:var(--cd);">–</strong></p>
       </div>
       <div class="prog-wrap"><div class="prog-fill" id="pb1" style="width:0%"></div></div>
       <p class="prog-txt" id="pt1">0 / 8 poster fullført</p>
       <hr>
       <div id="postGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px;"></div>
-      <div id="doneAllMsg" style="display:none;text-align:center;background:var(--gp);border-radius:14px;padding:16px;margin-top:6px;">
+      <div id="doneAllMsg" style="display:none;text-align:center;background:var(--cp);border-radius:14px;padding:16px;margin-top:6px;">
         <div style="font-size:2rem;">🎉</div>
-        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--gd);">Alle poster fullført!</div>
-        <button class="btn btn-green" style="margin-top:10px;" onclick="done()">Se resultater 🏆</button>
+        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--cd);">Alle poster fullført!</div>
+        <button class="btn btn-main" style="margin-top:10px;" onclick="done()">Se resultater 🏆</button>
       </div>
     </div>
   </div>
@@ -180,7 +199,7 @@ hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
       <div class="post-badge">
         <div class="post-num" id="qNum">1</div>
         <div style="flex:1;">
-          <div style="font-weight:800;font-size:.92rem;color:var(--gd);" id="qTitle">Post 1</div>
+          <div style="font-weight:800;font-size:.92rem;color:var(--cd);" id="qTitle">Post 1</div>
           <div style="font-size:.73rem;color:#888;" id="qSubTitle">Oppgave 1 av 3</div>
         </div>
       </div>
@@ -194,7 +213,7 @@ hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
         </div>
       </div>
       <div class="err" id="e3">Velg eller skriv inn et svar!</div>
-      <button class="btn btn-green" id="nextBtn" onclick="submitAns()">GÅ VIDERE ➡️</button>
+      <button class="btn btn-main" id="nextBtn" onclick="submitAns()">GÅ VIDERE ➡️</button>
     </div>
   </div>
 </div>
@@ -205,12 +224,10 @@ hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
     <div class="card" style="text-align:center;">
       <span class="trophy">🏆</span>
       <div class="title" style="margin-top:8px;">Gratulerer!</div>
-      <div class="subtitle">🎉 Naturstien fullført! 🎉</div>
+      <div class="subtitle" id="doneSubtitle">🎉 Naturstien fullført! 🎉</div>
       <hr>
-      <div style="background:var(--gp);border-radius:13px;padding:13px;margin:8px 0;text-align:left;" id="finSummary"></div>
-      <p style="font-size:.92rem;font-weight:700;color:#555;margin-top:8px;line-height:1.5;text-align:center;">
-        🌲 Dere har nå fullført Naturstien. Svar blir annonsert i løpet av kvelden! 😄
-      </p>
+      <div style="background:var(--cp);border-radius:13px;padding:13px;margin:8px 0;text-align:left;" id="finSummary"></div>
+      <p style="font-size:.92rem;font-weight:700;color:#555;margin-top:8px;line-height:1.5;text-align:center;" id="finMsg"></p>
       <hr>
       <div class="stars" id="finStars"></div>
       <p class="hint">Ha det gøy resten av leirskolen! 🌲</p>
@@ -219,85 +236,186 @@ hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
 </div>
 
 <script>
-const POSTS = [
-{
-  password:"Skog",
-  tasks:[
-    {type:"multiple",difficulty:"easy",question:"Hva heter treet som lager eikenøtter?",choices:["Bjørk","Eik","Gran","Furu"],correct:1},
-    {type:"multiple",difficulty:"easy",question:"Hvem synger 'Let it go' i Frost?",choices:["Anna","Ella","Elsa","Julia"],correct:2},
-    {type:"free",difficulty:"medium",question:"Nevn tre ting du kan finne i en skog."}
-  ]
-},
-{
-  password:"Leirskole",
-  tasks:[
-    {type:"multiple",difficulty:"medium",question:"Hvor mange bein har en edderkopp?",choices:["4","6","8","10"],correct:2},
-    {type:"multiple",difficulty:"easy",question:"Hvem er skogens konge i Norge?",choices:["Løve","Elg","Ape","Gorilla"],correct:1},
-    {type:"free",difficulty:"medium",question:"Hva er tre smarte ting å ha med på tur?"}
-  ]
-},
-{
-  password:"Konge",
-  tasks:[
-    {type:"multiple",difficulty:"easy",question:"Hva spiser en elg mest av?",choices:["Kjøtt og fisk","Kvister, bark og gress","Bare sopp","Godteri"],correct:1},
-    {type:"multiple",difficulty:"medium",question:"På hvilken side av trær vokser mose oftest?",choices:["Sørsiden","Nordsiden","Østsiden","Vestsiden"],correct:1},
-    {type:"free",difficulty:"easy",question:"Hvis du var skogens konge – hva ville du bestemt?"}
-  ]
-},
-{
-  password:"Banan",
-  tasks:[
-    {type:"multiple",difficulty:"medium",question:"Hva er spesielt med synet til rovfugler?",choices:["Ser i mørket","Ser bakover","Har ekstremt skarpt syn","Er fargeblinde"],correct:2},
-    {type:"multiple",difficulty:"medium",question:"Hva kjennetegner gaupa?",choices:["Den kan fly","Den har hårtupper på ørene","Den er en fugl","Den lever i havet"],correct:1},
-    {type:"free",difficulty:"medium",question:"Nevn tre lyder du kan høre i naturen."}
-  ]
-},
-{
-  password:"Tvedt",
-  tasks:[
-    {type:"multiple",difficulty:"hard",question:"Hva kalles prosessen der planter lager mat av sollys?",choices:["Respirasjon","Fotosyntese","Pollinering","Evaporasjon"],correct:1},
-    {type:"multiple",difficulty:"hard",question:"Hvordan kan man finne alderen til et tre?",choices:["Telle blader","Måle høyden","Telle årringer","Se på barken"],correct:2},
-    {type:"free",difficulty:"hard",question:"Hvorfor er trær viktige for mennesker? Nevn minst to grunner."}
-  ]
-},
-{
-  password:"Storm",
-  tasks:[
-    {type:"free",difficulty:"medium",question:"Nevn tre forskjellige uvær."}
-  ]
-},
-{
-  password:"Sommer",
-  tasks:[
-    {type:"free",difficulty:"hard",question:"Hvor mange perler er i denne boksen?"}
-  ]
-},
-{
-  password:"Løve",
-  tasks:[
-    {type:"free",difficulty:"hard",question:"Hvor langt er denne pinnen?"}
-  ]
-}
+// ══════════════════════════════════════
+// NATURSTIEN — poster
+// ══════════════════════════════════════
+const NATUR_POSTS = [
+  {
+    password:"Skog",
+    tasks:[
+      {type:"multiple",difficulty:"easy",question:"Hva heter treet som lager eikenøtter?",choices:["Bjørk","Eik","Gran","Furu"],correct:1},
+      {type:"multiple",difficulty:"easy",question:"Hvem synger 'Let it go' i Frost?",choices:["Anna","Ella","Elsa","Julia"],correct:2},
+      {type:"free",difficulty:"medium",question:"Nevn tre ting du kan finne i en skog."}
+    ]
+  },
+  {
+    password:"Leirskole",
+    tasks:[
+      {type:"multiple",difficulty:"medium",question:"Hvor mange bein har en edderkopp?",choices:["4","6","8","10"],correct:2},
+      {type:"multiple",difficulty:"easy",question:"Hvem er skogens konge i Norge?",choices:["Løve","Elg","Ape","Gorilla"],correct:1},
+      {type:"free",difficulty:"medium",question:"Hva er tre smarte ting å ha med på tur?"}
+    ]
+  },
+  {
+    password:"Konge",
+    tasks:[
+      {type:"multiple",difficulty:"easy",question:"Hva spiser en elg mest av?",choices:["Kjøtt og fisk","Kvister, bark og gress","Bare sopp","Godteri"],correct:1},
+      {type:"multiple",difficulty:"medium",question:"På hvilken side av trær vokser mose oftest?",choices:["Sørsiden","Nordsiden","Østsiden","Vestsiden"],correct:1},
+      {type:"free",difficulty:"easy",question:"Hvis du var skogens konge – hva ville du bestemt?"}
+    ]
+  },
+  {
+    password:"Banan",
+    tasks:[
+      {type:"multiple",difficulty:"medium",question:"Hva er spesielt med synet til rovfugler?",choices:["Ser i mørket","Ser bakover","Har ekstremt skarpt syn","Er fargeblinde"],correct:2},
+      {type:"multiple",difficulty:"medium",question:"Hva kjennetegner gaupa?",choices:["Den kan fly","Den har hårtupper på ørene","Den er en fugl","Den lever i havet"],correct:1},
+      {type:"free",difficulty:"medium",question:"Nevn tre lyder du kan høre i naturen."}
+    ]
+  },
+  {
+    password:"Tvedt",
+    tasks:[
+      {type:"multiple",difficulty:"hard",question:"Hva kalles prosessen der planter lager mat av sollys?",choices:["Respirasjon","Fotosyntese","Pollinering","Evaporasjon"],correct:1},
+      {type:"multiple",difficulty:"hard",question:"Hvordan kan man finne alderen til et tre?",choices:["Telle blader","Måle høyden","Telle årringer","Se på barken"],correct:2},
+      {type:"free",difficulty:"hard",question:"Hvorfor er trær viktige for mennesker? Nevn minst to grunner."}
+    ]
+  },
+  {
+    password:"Storm",
+    tasks:[
+      {type:"free",difficulty:"medium",question:"Nevn tre forskjellige uvær."}
+    ]
+  },
+  {
+    password:"Sommer",
+    tasks:[
+      {type:"free",difficulty:"hard",question:"Hvor mange perler er i denne boksen?"}
+    ]
+  },
+  {
+    password:"Løve",
+    tasks:[
+      {type:"free",difficulty:"hard",question:"Hvor langt er denne pinnen?"}
+    ]
+  }
 ];
 
-const WEBHOOK = "https://discord.com/api/webhooks/1491538829310693686/tsFmVLbkGyT7riRLgZwgr1_WTj3F42QoGhJPriFVpLqd567xM18M_OYs9uflAbgyBf93";
+// ══════════════════════════════════════
+// QUIZ — poster
+// ══════════════════════════════════════
+const QUIZ_POSTS = [
+  {
+    password:"BY1",
+    tasks:[
+      {type:"multiple",difficulty:"easy",question:"Hva er hovedstaden i Norge?",choices:["Bergen","Stavanger","Oslo","Trondheim"],correct:2},
+      {type:"multiple",difficulty:"easy",question:"Hvilken by er kjent for Eiffeltårnet?",choices:["Roma","Berlin","Madrid","Paris"],correct:3},
+      {type:"free",difficulty:"easy",question:"Nevn tre land i Skandinavia."}
+    ]
+  },
+  {
+    password:"BY2",
+    tasks:[
+      {type:"multiple",difficulty:"easy",question:"Hva heter den lengste elven i verden?",choices:["Amazonas","Nilen","Mississippi","Yangtze"],correct:1},
+      {type:"multiple",difficulty:"medium",question:"Hvilken by er kjent som 'The Big Apple'?",choices:["Los Angeles","Chicago","New York","Miami"],correct:2},
+      {type:"free",difficulty:"medium",question:"Hva heter de fem verdensdelen? Nevn alle."}
+    ]
+  },
+  {
+    password:"BY3",
+    tasks:[
+      {type:"multiple",difficulty:"medium",question:"Hva er valutaen i Japan?",choices:["Yuan","Yen","Won","Baht"],correct:1},
+      {type:"multiple",difficulty:"medium",question:"Hvilket land har flest innbyggere?",choices:["USA","India","Kina","Brasil"],correct:1},
+      {type:"free",difficulty:"medium",question:"Nevn tre kjente landemerker i verden."}
+    ]
+  },
+  {
+    password:"SAM1",
+    tasks:[
+      {type:"multiple",difficulty:"easy",question:"Hvor mange måneder er det i et år?",choices:["10","11","12","13"],correct:2},
+      {type:"multiple",difficulty:"easy",question:"Hva er 7 × 8?",choices:["54","56","58","64"],correct:1},
+      {type:"free",difficulty:"easy",question:"Nevn tre ting du gjør hver morgen."}
+    ]
+  },
+  {
+    password:"SAM2",
+    tasks:[
+      {type:"multiple",difficulty:"medium",question:"Hvem malte Mona Lisa?",choices:["Picasso","Michelangelo","Leonardo da Vinci","Rembrandt"],correct:2},
+      {type:"multiple",difficulty:"medium",question:"Hva er det raskeste landlevende dyret?",choices:["Løve","Gepard","Hest","Gaselle"],correct:1},
+      {type:"free",difficulty:"medium",question:"Hva er forskjellen på en by og en bygd? Forklar med egne ord."}
+    ]
+  },
+  {
+    password:"SAM3",
+    tasks:[
+      {type:"free",difficulty:"medium",question:"Hva heter presidenten i USA akkurat nå?"}
+    ]
+  },
+  {
+    password:"SAM4",
+    tasks:[
+      {type:"free",difficulty:"hard",question:"Hva heter de tre statsmaktene i Norge?"}
+    ]
+  },
+  {
+    password:"SAM5",
+    tasks:[
+      {type:"free",difficulty:"hard",question:"Nevn fem land som grenser til Russland."}
+    ]
+  }
+];
 
+const WEBHOOK_NATUR = "https://discord.com/api/webhooks/1491538829310693686/tsFmVLbkGyT7riRLgZwgr1_WTj3F42QoGhJPriFVpLqd567xM18M_OYs9uflAbgyBf93";
+const WEBHOOK_QUIZ  = "https://discord.com/api/webhooks/1494860389173952624/YD5gB2dfMzGOThYisABb09YWquc-OnU9_WXl7fM48khUJ1msgqHB118HiDHRRNFNI374";
+
+// ══════════════════════════════════════
+// GAME STATE
+// ══════════════════════════════════════
+let mode='natur'; // 'natur' | 'quiz'
+let POSTS = NATUR_POSTS;
+let WEBHOOK = WEBHOOK_NATUR;
 let teamName='', members=[], curPost=0, curTask=0, selChoice=null, curSession=null;
 let completedPosts=new Set();
 
+function setMode(m){
+  mode = m;
+  POSTS   = m==='quiz' ? QUIZ_POSTS   : NATUR_POSTS;
+  WEBHOOK = m==='quiz' ? WEBHOOK_QUIZ : WEBHOOK_NATUR;
+  if(m==='quiz'){
+    document.body.classList.add('quiz');
+  } else {
+    document.body.classList.remove('quiz');
+  }
+}
+
 function startGame(){
+  setMode('natur');
+  _start();
+}
+function startQuiz(){
+  setMode('quiz');
+  _start();
+}
+
+function _start(){
   teamName=document.getElementById('teamName').value.trim();
   members=Array.from(document.querySelectorAll('.mi')).map(i=>i.value.trim()).filter(Boolean);
   if(!teamName||!members.length){showErr('e1',true);return;}
   showErr('e1',false);
   curPost=0;curTask=0;selChoice=null;completedPosts=new Set();
   const ts=new Date().toLocaleString('no-NO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  curSession={team:teamName,members:[...members],timestamp:ts,answers:[]};
+  curSession={team:teamName,members:[...members],timestamp:ts,answers:[],mode};
   showPostPicker();
 }
 
 function showPostPicker(){
   show('s2');
+  if(mode==='quiz'){
+    document.getElementById('pickerEmoji').textContent='🧠';
+    document.getElementById('pickerTitle').textContent='Velg en quizpost!';
+  } else {
+    document.getElementById('pickerEmoji').textContent='🗺️';
+    document.getElementById('pickerTitle').textContent='Velg en post!';
+  }
   document.getElementById('teamLbl').textContent=teamName;
   const done=completedPosts.size;
   document.getElementById('pb1').style.width=(done/POSTS.length*100)+'%';
@@ -307,10 +425,10 @@ function showPostPicker(){
   POSTS.forEach((p,i)=>{
     const isDone=completedPosts.has(i);
     const btn=document.createElement('button');
-    btn.style.cssText=`padding:12px 4px;border-radius:16px;border:3px solid ${isDone?'var(--gm)':'var(--gl)'};background:${isDone?'var(--gm)':'#fff'};color:${isDone?'#fff':'var(--gd)'};font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;cursor:${isDone?'default':'pointer'};transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:3px;`;
+    btn.style.cssText=`padding:12px 4px;border-radius:16px;border:3px solid ${isDone?'var(--cm)':'var(--cl)'};background:${isDone?'var(--cm)':'#fff'};color:${isDone?'#fff':'var(--cd)'};font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;cursor:${isDone?'default':'pointer'};transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:3px;`;
     btn.innerHTML=`<span style="font-size:1.3rem;">${isDone?'✅':'📍'}</span><span>Post ${i+1}</span><span style="font-size:.65rem;opacity:.75;">${p.tasks.length} oppg.</span>`;
     if(!isDone){
-      btn.onmouseover=()=>{btn.style.background='var(--gp)';};
+      btn.onmouseover=()=>{btn.style.background='var(--cp)';};
       btn.onmouseout=()=>{btn.style.background='#fff';};
       btn.onclick=()=>openPost(i);
     }
@@ -390,6 +508,12 @@ async function done(){
   show('s4');
   const ok=curSession.answers.filter(a=>a.isCorrect===true).length;
   const tot=curSession.answers.filter(a=>a.isCorrect!==null).length;
+  document.getElementById('doneSubtitle').textContent = mode==='quiz'
+    ? '🎉 Quiz fullført! 🎉'
+    : '🎉 Naturstien fullført! 🎉';
+  document.getElementById('finMsg').textContent = mode==='quiz'
+    ? '🧠 Bra jobba! Resultatene blir annonsert i løpet av kvelden! 😄'
+    : '🌲 Dere har nå fullført Naturstien. Svar blir annonsert i løpet av kvelden! 😄';
   document.getElementById('finSummary').innerHTML=
     `<strong>Lag:</strong> ${esc(teamName)}<br>`+
     `<strong>Deltakere:</strong> ${members.map(esc).join(', ')}<br>`+
@@ -407,16 +531,17 @@ async function sendToDiscord(session){
     const icon=a.isCorrect===true?'✅':a.isCorrect===false?'❌':'✏️';
     lines+=`${icon} **Post ${a.postIndex+1} – Oppg.${a.taskIndex+1}:** ${a.given}\n`;
   });
+  const label = session.mode==='quiz' ? '🧠 Quiz' : '🌿 Naturstien';
   const embed={
-    title:'🏆 '+session.team+' har fullført Naturstien!',
-    color:0x40916c,
+    title:`🏆 ${session.team} har fullført ${label}!`,
+    color: session.mode==='quiz' ? 0xe05c28 : 0x40916c,
     fields:[
       {name:'👥 Deltakere',value:session.members.join(', '),inline:true},
       {name:'🕐 Tidspunkt',value:session.timestamp,inline:true},
       {name:'🎯 Resultat',value:ok+'/'+tot+' riktige (flervalg)',inline:true},
       {name:'📋 Alle svar',value:lines||'Ingen svar'}
     ],
-    footer:{text:'Naturstien · Leirskolen'}
+    footer:{text:'Leirskolen · '+label}
   };
   try{await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[embed]})});}
   catch(e){console.error('Discord feil:',e);}
