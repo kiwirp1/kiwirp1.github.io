@@ -1,446 +1,708 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Naturstien 🌿</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --gd:#2d6a4f; --gm:#40916c; --gl:#74c69d; --gp:#d8f3dc;
-  --yellow:#f9c74f; --brown:#6b4226; --cream:#fefae0; --red:#e63946;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Nunito',sans-serif;background:var(--gd);min-height:100vh;overflow-x:hidden;}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Storm Skau Tvedt — Konfirmasjon 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-.bg{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,#1a4731 0%,#2d6a4f 40%,#40916c 100%);overflow:hidden;}
-.tree{position:absolute;bottom:0;opacity:.15;animation:sway 4s ease-in-out infinite;font-size:3rem;}
-.tree:nth-child(1){left:3%;font-size:4rem;animation-delay:0s}
-.tree:nth-child(2){left:12%;font-size:2.5rem;animation-delay:.5s}
-.tree:nth-child(3){left:22%;font-size:5rem;animation-delay:1s}
-.tree:nth-child(4){left:33%;font-size:3rem;animation-delay:.3s}
-.tree:nth-child(5){left:45%;font-size:4.5rem;animation-delay:.8s}
-.tree:nth-child(6){left:58%;font-size:3.5rem;animation-delay:1.2s}
-.tree:nth-child(7){left:68%;font-size:5rem;animation-delay:.2s}
-.tree:nth-child(8){left:78%;font-size:2.8rem;animation-delay:.7s}
-.tree:nth-child(9){left:88%;font-size:4rem;animation-delay:1.5s}
-.tree:nth-child(10){left:96%;font-size:3rem;animation-delay:.4s}
-@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+    :root {
+      --cream: #f7f3ec;
+      --warm-white: #fdfaf5;
+      --gold: #b89a5e;
+      --gold-light: #d4b98a;
+      --dark: #1a1714;
+      --text: #3a342c;
+      --text-muted: #8a7f72;
+      --border: #e2d9cc;
+    }
 
-.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;position:relative;z-index:10;}
-.card{background:var(--cream);border-radius:28px;padding:28px 24px;max-width:420px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.35);border:4px solid var(--gl);}
+    html { scroll-behavior: smooth; }
 
-.title{font-family:'Fredoka One',cursive;font-size:2.6rem;color:var(--gd);text-align:center;line-height:1.1;}
-.subtitle{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--gm);text-align:center;margin-top:4px;}
-.emoji-big{font-size:3.2rem;text-align:center;display:block;margin-bottom:6px;}
-.lbl{font-size:.88rem;font-weight:800;color:var(--gd);margin-bottom:5px;display:block;}
-.hint{font-size:.8rem;color:#888;text-align:center;margin-top:6px;}
+    body {
+      background-color: var(--warm-white);
+      color: var(--text);
+      font-family: 'Tenor Sans', sans-serif;
+      overflow-x: hidden;
+    }
 
-input[type=text],textarea{
-  width:100%;padding:13px 15px;border:3px solid var(--gl);border-radius:14px;
-  font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;
-  background:#fff;color:var(--gd);outline:none;margin-bottom:12px;
-  transition:border-color .2s,box-shadow .2s;
-}
-input:focus,textarea:focus{border-color:var(--gm);box-shadow:0 0 0 4px rgba(116,198,157,.25);}
-textarea{resize:none;}
+    /* ---- NOISE TEXTURE OVERLAY ---- */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
 
-.btn{width:100%;padding:15px;border:none;border-radius:18px;font-family:'Fredoka One',cursive;font-size:1.25rem;cursor:pointer;transition:transform .15s,box-shadow .15s;margin-top:6px;}
-.btn-green{background:var(--gm);color:#fff;box-shadow:0 6px 0 var(--gd);}
-.btn-green:active{box-shadow:0 2px 0 var(--gd);transform:translateY(4px);}
-.btn-yellow{background:var(--yellow);color:var(--brown);box-shadow:0 6px 0 #b8860b;}
-.btn-yellow:active{box-shadow:0 2px 0 #b8860b;transform:translateY(4px);}
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--cream);
+      overflow: hidden;
+    }
 
-.err{background:#fde8e8;color:#c0392b;border-radius:12px;padding:10px 14px;font-weight:700;font-size:.88rem;text-align:center;margin-top:6px;display:none;}
-.err.show{display:block;animation:shake .3s;}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,154,94,0.12) 0%, transparent 70%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; right: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,154,94,0.08) 0%, transparent 70%);
+    }
 
-hr{border:none;border-top:2px dashed var(--gl);margin:16px 0;}
+    .hero-ornament {
+      font-size: 1rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.2s;
+    }
 
-.member-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;}
-.member-row input{margin-bottom:0;flex:1;}
-.rm-btn{background:none;border:2px solid #ddd;border-radius:10px;width:38px;height:46px;cursor:pointer;font-size:1rem;color:#aaa;flex-shrink:0;transition:all .2s;}
-.rm-btn:hover{border-color:var(--red);color:var(--red);}
-.add-btn{background:none;border:2px dashed var(--gl);border-radius:12px;padding:9px;width:100%;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:var(--gm);cursor:pointer;margin-bottom:12px;transition:all .2s;}
-.add-btn:hover{background:var(--gp);}
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      color: var(--dark);
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.5s;
+    }
 
-.prog-wrap{background:rgba(45,106,79,.15);border-radius:99px;height:11px;overflow:hidden;margin:8px 0 4px;}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--gm),var(--gl));border-radius:99px;transition:width .5s;}
-.prog-txt{font-size:.78rem;font-weight:700;color:var(--gm);text-align:right;}
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
 
-.post-badge{display:flex;align-items:center;gap:10px;background:var(--gp);border-radius:14px;padding:10px 14px;margin-bottom:14px;}
-.post-num{background:var(--gm);color:#fff;font-family:'Fredoka One',cursive;font-size:1.3rem;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 2.5rem auto;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.8s;
+    }
 
-.task-dots{display:flex;gap:6px;margin-bottom:12px;justify-content:center;}
-.task-dot{width:10px;height:10px;border-radius:50%;background:#ddd;transition:background .3s;}
-.task-dot.done{background:var(--gm);}
-.task-dot.active{background:var(--yellow);box-shadow:0 0 0 3px rgba(249,199,79,.3);}
+    .hero-divider span {
+      height: 1px;
+      width: 80px;
+      background: linear-gradient(to right, transparent, var(--gold-light));
+    }
+    .hero-divider span:last-child {
+      background: linear-gradient(to left, transparent, var(--gold-light));
+    }
 
-.q-box{background:#fff;border-radius:18px;padding:16px;border:3px solid var(--gp);margin-bottom:14px;}
-.q-text{font-size:1.1rem;font-weight:800;color:var(--gd);line-height:1.4;margin-bottom:12px;}
-.diff-tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:99px;margin-bottom:8px;}
-.diff-easy{background:#d8f3dc;color:var(--gd)}
-.diff-medium{background:#fff3cd;color:#856404}
-.diff-hard{background:#fde8e8;color:#c0392b}
+    .hero-divider svg {
+      width: 18px; height: 18px;
+      fill: var(--gold);
+    }
 
-.choices{display:flex;flex-direction:column;gap:8px;}
-.choice{width:100%;text-align:left;padding:11px 14px;border:3px solid var(--gp);border-radius:13px;background:#fff;font-family:'Nunito',sans-serif;font-size:.98rem;font-weight:700;color:var(--gd);cursor:pointer;transition:all .2s;}
-.choice:hover{border-color:var(--gl);background:var(--gp);}
-/* selected = blue-ish neutral, NOT green, to avoid hinting at correctness */
-.choice.selected{border-color:#4a90d9;background:#ddeeff;color:#1a3a5c;}
+    .hero-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1s;
+    }
 
-.stars{display:flex;justify-content:center;gap:3px;margin:8px 0;flex-wrap:wrap;}
-.star{font-size:1rem;opacity:.2;transition:opacity .3s;}
-.star.lit{opacity:1;}
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 1.8s;
+    }
 
-.lock{font-size:2.6rem;text-align:center;display:block;animation:pulse 2s ease infinite;}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-.trophy{font-size:5rem;display:block;text-align:center;animation:bounce 1s ease infinite;}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    .scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
 
-.screen{display:none;}
-.screen.active{display:block;}
-</style>
+    .scroll-hint .line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ---- SECTIONS ---- */
+    section {
+      padding: 6rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .section-text {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    /* ---- DIVIDER ---- */
+    .full-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0;
+    }
+
+    /* ---- INFO CARDS ---- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    .info-card {
+      border: 1px solid var(--border);
+      padding: 2.2rem;
+      position: relative;
+      background: var(--cream);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .info-card:hover {
+      border-color: var(--gold-light);
+      transform: translateY(-3px);
+    }
+
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40px; height: 2px;
+      background: var(--gold);
+    }
+
+    .info-card-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .info-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-card-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ---- VIPPS ---- */
+    .vipps-block {
+      margin-top: 3rem;
+      border: 1px solid var(--border);
+      padding: 3rem;
+      text-align: center;
+      background: var(--cream);
+      position: relative;
+    }
+
+    .vipps-block::before, .vipps-block::after {
+      content: '✦';
+      position: absolute;
+      color: var(--gold-light);
+      font-size: 0.8rem;
+    }
+    .vipps-block::before { top: 1rem; left: 1.2rem; }
+    .vipps-block::after  { bottom: 1rem; right: 1.2rem; }
+
+    .vipps-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .vipps-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      font-weight: 300;
+      color: var(--dark);
+      letter-spacing: 0.1em;
+      line-height: 1;
+    }
+
+    .vipps-name {
+      margin-top: 0.7rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .vipps-copy-btn {
+      margin-top: 1.8rem;
+      display: inline-block;
+      padding: 0.75rem 2.5rem;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .vipps-copy-btn:hover {
+      background: var(--gold);
+      color: var(--warm-white);
+    }
+
+    /* ---- RSVP ---- */
+    .rsvp-form {
+      margin-top: 3rem;
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 0.9rem 1.1rem;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.3s ease;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .rsvp-submit {
+      margin-top: 0.5rem;
+      padding: 1.1rem 3rem;
+      background: var(--dark);
+      color: var(--cream);
+      border: none;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      align-self: flex-start;
+    }
+
+    .rsvp-submit:hover { background: var(--gold); }
+
+    .rsvp-success {
+      display: none;
+      text-align: center;
+      padding: 3rem;
+      border: 1px solid var(--border);
+      background: var(--cream);
+    }
+
+    .rsvp-success .checkmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .rsvp-success p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--dark);
+      color: var(--text-muted);
+    }
+
+    footer .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #5a5348;
+    }
+
+    /* ---- ANIMATIONS ---- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- MOBILE ---- */
+    @media (max-width: 480px) {
+      .hero {
+        padding: 5rem 1.5rem 6rem;
+        min-height: 100svh;
+      }
+
+      .hero-ornament {
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 15vw, 4.5rem);
+      }
+
+      .hero-date {
+        font-size: 1.1rem;
+      }
+
+      .hero-divider span {
+        width: 50px;
+      }
+
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .section-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.3em;
+      }
+
+      .section-title {
+        font-size: clamp(1.8rem, 8vw, 2.4rem);
+      }
+
+      .section-text {
+        font-size: 0.95rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+        margin-top: 2rem;
+      }
+
+      .info-card {
+        padding: 1.6rem;
+      }
+
+      .vipps-block {
+        padding: 2rem 1.2rem;
+      }
+
+      .vipps-number {
+        font-size: clamp(2.2rem, 10vw, 3rem);
+        letter-spacing: 0.06em;
+      }
+
+      .vipps-copy-btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+      }
+
+      .rsvp-form {
+        margin-top: 2rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        font-size: 1rem; /* prevents iOS zoom on focus */
+        padding: 0.85rem 1rem;
+      }
+
+      .rsvp-submit {
+        width: 100%;
+        padding: 1.1rem;
+        align-self: stretch;
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+      }
+
+      .rsvp-success {
+        padding: 2rem 1.2rem;
+      }
+
+      footer {
+        padding: 3rem 1.5rem;
+      }
+
+      footer .footer-name {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="bg">
-  <div class="tree">🌲</div><div class="tree">🌿</div><div class="tree">🌳</div>
-  <div class="tree">🌲</div><div class="tree">🌳</div><div class="tree">🌲</div>
-  <div class="tree">🌳</div><div class="tree">🌿</div><div class="tree">🌲</div><div class="tree">🌳</div>
-</div>
-
-<!-- S1: Register -->
-<div id="s1" class="screen active">
-  <div class="page">
-    <div class="card">
-      <span class="emoji-big">🌿</span>
-      <div class="title">Naturstien</div>
-      <div class="subtitle">Familiekonkurransen</div>
-      <hr>
-      <label class="lbl">🏷️ Lagnavn</label>
-      <input type="text" id="teamName" placeholder="t.d. «De Raske Røtter»" maxlength="30">
-      <label class="lbl">👨‍👩‍👧‍👦 Hvem er på laget?</label>
-      <div id="memberList">
-        <div class="member-row"><input type="text" placeholder="Navn" class="mi" maxlength="25"><button class="rm-btn" onclick="rmMember(this)">✕</button></div>
-        <div class="member-row"><input type="text" placeholder="Navn" class="mi" maxlength="25"><button class="rm-btn" onclick="rmMember(this)">✕</button></div>
-      </div>
-      <button class="add-btn" onclick="addMember()">＋ Legg til person</button>
-      <div class="err" id="e1">Fyll inn lagnavn og minst ett navn!</div>
-      <button class="btn btn-green" onclick="startGame()">🌲 SPILL!</button>
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-ornament">Konfirmasjon 2026</p>
+    <h1>Storm<br><em>Skau Tvedt</em></h1>
+    <div class="hero-divider">
+      <span></span>
+      <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+      <span></span>
     </div>
-  </div>
-</div>
+    <p class="hero-date">Lørdag 23. mai 2026</p>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
 
-<!-- S2: Post Picker -->
-<div id="s2" class="screen">
-  <div class="page" style="justify-content:flex-start;padding-top:28px;">
-    <div class="card" style="max-width:480px;">
-      <div style="text-align:center;margin-bottom:4px;">
-        <span style="font-size:2rem;">🗺️</span>
-        <div class="title" style="font-size:1.6rem;">Velg en post!</div>
-        <p style="font-size:.82rem;color:#777;font-weight:600;margin-top:4px;">Lag: <strong id="teamLbl" style="color:var(--gd);">–</strong></p>
+  <div class="full-divider"></div>
+
+  <!-- DATO OG STED -->
+  <section class="reveal">
+    <p class="section-label">Praktisk info</p>
+    <h2 class="section-title">Dato <em>&amp; Sted</em></h2>
+    <p class="section-text">Her finner du all informasjon du trenger om dagen. Gleder meg til å feire med deg!</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <p class="info-card-label">Gudstjeneste</p>
+        <h3 class="info-card-title">Søm Kirke</h3>
+        <p class="info-card-sub">Lørdag 23. mai 2026<br>Tid oppgis nærmere</p>
       </div>
-      <div class="prog-wrap"><div class="prog-fill" id="pb1" style="width:0%"></div></div>
-      <p class="prog-txt" id="pt1">0 / 8 poster fullført</p>
-      <hr>
-      <div id="postGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px;"></div>
-      <div id="doneAllMsg" style="display:none;text-align:center;background:var(--gp);border-radius:14px;padding:16px;margin-top:6px;">
-        <div style="font-size:2rem;">🎉</div>
-        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--gd);">Alle poster fullført!</div>
-        <button class="btn btn-green" style="margin-top:10px;" onclick="done()">Se resultater 🏆</button>
+      <div class="info-card">
+        <p class="info-card-label">Feiring</p>
+        <h3 class="info-card-title">Jegersberg Gård</h3>
+        <p class="info-card-sub">Lørdag 23. mai 2026<br>Etter gudstjenesten</p>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- S2b: Password -->
-<div id="s2b" class="screen">
-  <div class="page">
-    <div class="card">
-      <span class="lock">🔒</span>
-      <div class="title" style="font-size:1.65rem;margin-top:8px;">Finn posten!</div>
-      <p style="text-align:center;color:#666;font-weight:600;font-size:.88rem;margin:6px 0 14px;">
-        Gå til <strong id="postLabel">Post 1</strong> og skriv inn koden du finner der
-      </p>
-      <hr>
-      <label class="lbl">🔑 Kode fra posten</label>
-      <input type="text" id="pwInput" placeholder="Skriv koden her..." autocomplete="off"
-        onkeydown="if(event.key==='Enter')checkPw()">
-      <div class="err" id="e2">Feil kode! Sjekk posten igjen 🔍</div>
-      <button class="btn btn-yellow" onclick="checkPw()">🔓 LÅS OPP</button>
-      <button class="btn" style="background:#eee;color:#666;margin-top:6px;font-size:1rem;" onclick="show('s2')">← Tilbake</button>
+  <div class="full-divider"></div>
+
+  <!-- GAVEØNSKER -->
+  <section class="reveal">
+    <p class="section-label">Gaveønsker</p>
+    <h2 class="section-title">Pengegave <em>via Vipps</em></h2>
+    <p class="section-text">Den beste gaven for meg er en pengegave. Send gjerne via Vipps:</p>
+
+    <div class="vipps-block">
+      <p class="vipps-label">Vipps-nummer</p>
+      <div class="vipps-number">97 67 22 07</div>
+      <p class="vipps-name">Storm Skau Tvedt</p>
+      <button class="vipps-copy-btn" onclick="copyVipps(this)">Kopier nummer</button>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- S3: Question -->
-<div id="s3" class="screen">
-  <div class="page">
-    <div class="card">
-      <div class="post-badge">
-        <div class="post-num" id="qNum">1</div>
-        <div style="flex:1;">
-          <div style="font-weight:800;font-size:.92rem;color:var(--gd);" id="qTitle">Post 1</div>
-          <div style="font-size:.73rem;color:#888;" id="qSubTitle">Oppgave 1 av 3</div>
+  <div class="full-divider"></div>
+
+  <!-- RSVP -->
+  <section class="reveal">
+    <p class="section-label">Påmelding</p>
+    <h2 class="section-title">Meld deg <em>på</em></h2>
+    <p class="section-text">Gi beskjed innen 1. mai 2026 om du kommer.</p>
+
+    <div class="rsvp-form" id="rsvpForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Navn</label>
+          <input type="text" placeholder="Ditt fulle navn" id="rsvpNavn">
+        </div>
+        <div class="form-group">
+          <label>Kommer du?</label>
+          <select id="rsvpSvar">
+            <option value="">Velg...</option>
+            <option value="ja">Ja, jeg kommer!</option>
+            <option value="nei">Beklager, jeg kan ikke</option>
+          </select>
         </div>
       </div>
-      <div class="task-dots" id="taskDots"></div>
-      <div class="q-box">
-        <span class="diff-tag diff-easy" id="diffTag">🟢 Lett</span>
-        <div class="q-text" id="qText">Laster...</div>
-        <div class="choices" id="choicesArea"></div>
-        <div id="freeArea" style="display:none">
-          <textarea id="freeAns" placeholder="Skriv svaret ditt her..." rows="3" style="margin-bottom:0;"></textarea>
-        </div>
+      <div class="form-group">
+        <label>Antall gjester (inkl. deg selv)</label>
+        <input type="number" placeholder="1" min="1" max="10" id="rsvpAntall">
       </div>
-      <div class="err" id="e3">Velg eller skriv inn et svar!</div>
-      <button class="btn btn-green" id="nextBtn" onclick="submitAns()">GÅ VIDERE ➡️</button>
+      <div class="form-group">
+        <label>Melding (valgfritt)</label>
+        <textarea placeholder="Allergier, hilsener eller annet..." id="rsvpMelding"></textarea>
+      </div>
+      <button class="rsvp-submit" onclick="submitRSVP()">Send påmelding</button>
     </div>
-  </div>
-</div>
 
-<!-- S4: Done -->
-<div id="s4" class="screen">
-  <div class="page">
-    <div class="card" style="text-align:center;">
-      <span class="trophy">🏆</span>
-      <div class="title" style="margin-top:8px;">Gratulerer!</div>
-      <div class="subtitle">🎉 Naturstien fullført! 🎉</div>
-      <hr>
-      <div style="background:var(--gp);border-radius:13px;padding:13px;margin:8px 0;text-align:left;" id="finSummary"></div>
-      <p style="font-size:.92rem;font-weight:700;color:#555;margin-top:8px;line-height:1.5;text-align:center;">
-        🌲 Dere har nå fullført Naturstien. Svar blir annonsert i løpet av kvelden! 😄
-      </p>
-      <hr>
-      <div class="stars" id="finStars"></div>
-      <p class="hint">Ha det gøy resten av leirskolen! 🌲</p>
+    <div class="rsvp-success" id="rsvpSuccess">
+      <div class="checkmark">✦</div>
+      <p>Takk! Vi sees 23. mai.</p>
     </div>
-  </div>
-</div>
+  </section>
 
-<script>
-const POSTS = [
-{
-password:"Skog",
-tasks:[
-  {type:"multiple",difficulty:"Lett",question:"Hva heter treet som lager eikenøtter?",choices:["Bjørk","Eik","Gran","Furu"],correct:1},
-  {type:"multiple",difficulty:"Lett",question:"Hvem synger 'Let it go' i Frost?",choices:["Anna","Ella","Elsa","Julia"],correct:2},
-  {type:"free",difficulty:"Medium",question:"Nevn tre ting du kan finne i en skog."}
-]
-},
-{
-  password:"Leirskole",
-  tasks:[
-    {type:"multiple",difficulty:"Medium",question:"Hvor mange bein har en edderkopp?",choices:["4","6","8","10"],correct:2},
-    {type:"multiple",difficulty:"Lett",question:"Hvem er skogens konge i Norge?",choices:["Løve","Elg","Ape","Gorilla"],correct:1},
-    {type:"free",difficulty:"Medium",question:"Hva er tre smarte ting å ha med på tur?"}
-  ]
-},
-{
-  password:"Konge",
-  tasks:[
-    {type:"multiple",difficulty:"Lett",question:"Hva spiser en elg mest av?",choices:["Kjøtt og fisk","Kvister, bark og gress","Bare sopp","Godteri"],correct:1},
-    {type:"multiple",difficulty:"Medium",question:"På hvilken side av trær vokser mose oftest?",choices:["Sørsiden","Nordsiden","Østsiden","Vestsiden"],correct:1},
-    {type:"free",difficulty:"Lett",question:"Hvis du var skogens konge – hva ville du bestemt?"}
-  ]
-},
-{
-  password:"Banan",
-  tasks:[
-    {type:"multiple",difficulty:"Medium",question:"Hva er spesielt med synet til rovfugler?",choices:["Ser i mørket","Ser bakover","Har ekstremt skarpt syn","Er fargeblinde"],correct:2},
-    {type:"multiple",difficulty:"Medium",question:"Hva kjennetegner gaupa?",choices:["Den kan fly","Den har hårtupper på ørene","Den er en fugl","Den lever i havet"],correct:1},
-    {type:"free",difficulty:"Medium",question:"Nevn tre lyder du kan høre i naturen."}
-  ]
-},
-{
-  password:"Tvedt",
-  tasks:[
-    {type:"multiple",difficulty:"Vannskelig",question:"Hva kalles prosessen der planter lager mat av sollys?",choices:["Respirasjon","Fotosyntese","Pollinering","Evaporasjon"],correct:1},
-    {type:"multiple",difficulty:"Vannskelig",question:"Hvordan kan man finne alderen til et tre?",choices:["Telle blader","Måle høyden","Telle årringer","Se på barken"],correct:2},
-    {type:"free",difficulty:"Vannskelig",question:"Hvorfor er trær viktige for mennesker? Nevn minst to grunner."}
-  ]
-},
-{
-  password:"Storm",
-  tasks:[
-    {type:"free",difficulty:"Medium",question:"Nevn tre forskjellige uvær.."}
-  ]
-},
-{
-  password:"Sommer",
-  tasks:[
-    {type:"free",difficulty:"Vannskelig",question:"Hvor mange perler er i denne boksen?"}
-  ]
-},
-{
-  password:"Løve",
-  tasks:[
-    {type:"free",difficulty:"Vannskelig",question:"Hvor langt er denne pinnen?."}
-  ]
-}
-];
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Storm Skau Tvedt</div>
+    <p>Konfirmasjon &mdash; 23. mai 2026</p>
+  </footer>
 
-const WEBHOOK = "https://discord.com/api/webhooks/1491538829310693686/tsFmVLbkGyT7riRLgZwgr1_WTj3F42QoGhJPriFVpLqd567xM18M_OYs9uflAbgyBf93";
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
 
-let teamName='', members=[], curPost=0, curTask=0, selChoice=null, curSession=null;
-let completedPosts=new Set();
-
-function startGame(){
-  teamName=document.getElementById('teamName').value.trim();
-  members=Array.from(document.querySelectorAll('.mi')).map(i=>i.value.trim()).filter(Boolean);
-  if(!teamName||!members.length){showErr('e1',true);return;}
-  showErr('e1',false);
-  curPost=0;curTask=0;selChoice=null;completedPosts=new Set();
-  const ts=new Date().toLocaleString('no-NO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  curSession={team:teamName,members:[...members],timestamp:ts,answers:[]};
-  showPostPicker();
-}
-
-function showPostPicker(){
-  show('s2');
-  document.getElementById('teamLbl').textContent=teamName;
-  const done=completedPosts.size;
-  document.getElementById('pb1').style.width=(done/POSTS.length*100)+'%';
-  document.getElementById('pt1').textContent=done+' / '+POSTS.length+' poster fullført';
-  const grid=document.getElementById('postGrid');
-  grid.innerHTML='';
-  POSTS.forEach((p,i)=>{
-    const isDone=completedPosts.has(i);
-    const btn=document.createElement('button');
-    btn.style.cssText=`padding:12px 4px;border-radius:16px;border:3px solid ${isDone?'var(--gm)':'var(--gl)'};background:${isDone?'var(--gm)':'#fff'};color:${isDone?'#fff':'var(--gd)'};font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;cursor:${isDone?'default':'pointer'};transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:3px;`;
-    btn.innerHTML=`<span style="font-size:1.3rem;">${isDone?'✅':'📍'}</span><span>Post ${i+1}</span><span style="font-size:.65rem;opacity:.75;">${p.tasks.length} oppg.</span>`;
-    if(!isDone){
-      btn.onmouseover=()=>{btn.style.background='var(--gp)';};
-      btn.onmouseout=()=>{btn.style.background='#fff';};
-      btn.onclick=()=>openPost(i);
+    // Copy Vipps
+    function copyVipps(btn) {
+      navigator.clipboard.writeText('97672207').then(() => {
+        btn.textContent = 'Kopiert! ✓';
+        setTimeout(() => btn.textContent = 'Kopier nummer', 2000);
+      });
     }
-    grid.appendChild(btn);
-  });
-  const allDone=completedPosts.size>=POSTS.length;
-  document.getElementById('doneAllMsg').style.display=allDone?'block':'none';
-  grid.style.display=allDone?'none':'grid';
-}
 
-function openPost(i){
-  curPost=i;curTask=0;
-  show('s2b');
-  document.getElementById('pwInput').value='';
-  document.getElementById('postLabel').textContent='Post '+(i+1);
-  showErr('e2',false);
-}
-
-function checkPw(){
-  const val=document.getElementById('pwInput').value.trim().toUpperCase();
-  const exp=(POSTS[curPost].password||'').toUpperCase();
-  if(val===exp){showErr('e2',false);showQ();}
-  else{showErr('e2',true);document.getElementById('pwInput').select();}
-}
-
-function showQ(){
-  const p=POSTS[curPost],t=p.tasks[curTask],total=p.tasks.length;
-  show('s3');
-  // Always reset selChoice to null when showing a new question
-  selChoice=null;
-  document.getElementById('qNum').textContent=curPost+1;
-  document.getElementById('qTitle').textContent='Post '+(curPost+1);
-  document.getElementById('qSubTitle').textContent=total>1?'Oppgave '+(curTask+1)+' av '+total:'Skriv svaret ditt';
-  const dotsEl=document.getElementById('taskDots');
-  dotsEl.innerHTML='';
-  if(total>1){
-    for(let d=0;d<total;d++){const dot=document.createElement('div');dot.className='task-dot'+(d<curTask?' done':d===curTask?' active':'');dotsEl.appendChild(dot);}
-    dotsEl.style.display='flex';
-  } else {dotsEl.style.display='none';}
-  const diffMap={
-    'Lett':['diff-easy','🟢 Lett'],
-    'Medium':['diff-medium','🟡 Middels'],
-    'Vannskelig':['diff-hard','🔴 Vanskelig']
-  };
-  const d=diffMap[t.difficulty]||diffMap['Lett'];
-  const tag=document.getElementById('diffTag');tag.className='diff-tag '+d[0];tag.textContent=d[1];
-  document.getElementById('qText').textContent=t.question;
-  const ca=document.getElementById('choicesArea'),fa=document.getElementById('freeArea');
-  if(t.type==='multiple'){
-    fa.style.display='none';
-    // Rebuild choice buttons fresh each time (no lingering .selected class)
-    ca.innerHTML='';
-    (t.choices||[]).forEach((ch,i)=>{
-      const b=document.createElement('button');
-      b.className='choice';
-      b.textContent=['A','B','C','D'][i]+'. '+ch;
-      b.onclick=()=>{
-        document.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));
-        b.classList.add('selected');
-        selChoice=i;
-        showErr('e3',false);
-      };
-      ca.appendChild(b);
-    });
-  } else {
-    ca.innerHTML='';fa.style.display='block';document.getElementById('freeAns').value='';
-  }
-  const isLast=curTask>=total-1;
-  const nb=document.getElementById('nextBtn');
-  nb.textContent=isLast?'FULLFØR POST ✅':'NESTE OPPGAVE ➡️';
-  nb.onclick=submitAns;
-  showErr('e3',false);
-}
-
-function submitAns(){
-  const p=POSTS[curPost],t=p.tasks[curTask];
-  if(t.type==='multiple'){
-    if(selChoice===null){showErr('e3',true);return;}
-    curSession.answers.push({postIndex:curPost,taskIndex:curTask,question:t.question,given:t.choices[selChoice],correct:t.choices[t.correct],isCorrect:selChoice===t.correct,type:'multiple'});
-  } else {
-    const ans=document.getElementById('freeAns').value.trim();
-    if(!ans){showErr('e3',true);return;}
-    curSession.answers.push({postIndex:curPost,taskIndex:curTask,question:t.question,given:ans,correct:'(fritekst)',isCorrect:null,type:'free'});
-  }
-  curTask++;
-  if(curTask<p.tasks.length){showQ();}
-  else{completedPosts.add(curPost);showPostPicker();}
-}
-
-async function done(){
-  await sendToDiscord(curSession);
-  show('s4');
-  // Show only team info — NO score revealed to players
-  document.getElementById('finSummary').innerHTML=
-    `<strong>Lag:</strong> ${esc(teamName)}<br>`+
-    `<strong>Deltakere:</strong> ${members.map(esc).join(', ')}<br>`+
-    `<strong>Poster fullført:</strong> ${POSTS.length}/${POSTS.length} 🌟`;
-  const fs=document.getElementById('finStars');fs.innerHTML='';
-  for(let i=0;i<POSTS.length;i++){const s=document.createElement('span');s.className='star lit';s.textContent='⭐';fs.appendChild(s);}
-}
-
-async function sendToDiscord(session){
-  const ok=session.answers.filter(a=>a.isCorrect===true).length;
-  const tot=session.answers.filter(a=>a.isCorrect!==null).length;
-  let lines='';
-  session.answers.forEach(a=>{
-    const icon=a.isCorrect===true?'✅':a.isCorrect===false?'❌':'✏️';
-    lines+=`${icon} **Post ${a.postIndex+1} – Oppg.${a.taskIndex+1}:** ${a.given}\n`;
-  });
-  const embed={
-    title:'🏆 '+session.team+' har fullført Naturstien!',
-    color:0x40916c,
-    fields:[
-      {name:'👥 Deltakere',value:session.members.join(', '),inline:true},
-      {name:'🕐 Tidspunkt',value:session.timestamp,inline:true},
-      {name:'🎯 Resultat',value:ok+'/'+tot+' riktige (flervalg)',inline:true},
-      {name:'📋 Alle svar',value:lines||'Ingen svar'}
-    ],
-    footer:{text:'Naturstien · Leirskolen'}
-  };
-  try{await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[embed]})});}
-  catch(e){console.error('Discord feil:',e);}
-}
-
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
-function showErr(id,v){document.getElementById(id).classList.toggle('show',v);}
-function addMember(){const r=document.createElement('div');r.className='member-row';r.innerHTML='<input type="text" placeholder="Navn" class="mi" maxlength="25"><button class="rm-btn" onclick="rmMember(this)">✕</button>';document.getElementById('memberList').appendChild(r);}
-function rmMember(btn){if(document.querySelectorAll('.member-row').length>1)btn.parentElement.remove();}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-</script>
+    // RSVP submit
+    function submitRSVP() {
+      const navn = document.getElementById('rsvpNavn').value.trim();
+      const svar = document.getElementById('rsvpSvar').value;
+      if (!navn || !svar) {
+        alert('Vennligst fyll ut navn og om du kommer.');
+        return;
+      }
+      document.getElementById('rsvpForm').style.display = 'none';
+      document.getElementById('rsvpSuccess').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
