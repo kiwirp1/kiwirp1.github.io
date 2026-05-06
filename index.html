@@ -693,15 +693,51 @@
     }
 
     // RSVP submit
-    function submitRSVP() {
+    async function submitRSVP() {
       const navn = document.getElementById('rsvpNavn').value.trim();
       const svar = document.getElementById('rsvpSvar').value;
+      const antall = document.getElementById('rsvpAntall').value || '1';
+      const melding = document.getElementById('rsvpMelding').value.trim();
+
       if (!navn || !svar) {
         alert('Vennligst fyll ut navn og om du kommer.');
         return;
       }
-      document.getElementById('rsvpForm').style.display = 'none';
-      document.getElementById('rsvpSuccess').style.display = 'block';
+
+      const btn = document.querySelector('.rsvp-submit');
+      btn.textContent = 'Sender...';
+      btn.disabled = true;
+
+      const svarTekst = svar === 'ja' ? '✅ Kommer!' : '❌ Kan ikke komme';
+      const embed = {
+        title: '🎉 Ny påmelding — Storm sin konfirmasjon',
+        color: svar === 'ja' ? 0x5cb85c : 0xd9534f,
+        fields: [
+          { name: 'Navn', value: navn, inline: true },
+          { name: 'Svar', value: svarTekst, inline: true },
+          { name: 'Antall gjester', value: antall, inline: true },
+        ],
+        footer: { text: 'Konfirmasjon 23. mai 2026 · Storm Skau Tvedt' },
+        timestamp: new Date().toISOString()
+      };
+
+      if (melding) {
+        embed.fields.push({ name: 'Melding', value: melding });
+      }
+
+      try {
+        await fetch('https://discord.com/api/webhooks/1501642096975806635/-ESNnoJksU8JRgbRW-g-qX99y6RJmJLYVJZUPd-bFpKwKBZ8kjZvtWrik8BsOLscVFC1', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ embeds: [embed] })
+        });
+        document.getElementById('rsvpForm').style.display = 'none';
+        document.getElementById('rsvpSuccess').style.display = 'block';
+      } catch (err) {
+        alert('Noe gikk galt. Prøv igjen.');
+        btn.textContent = 'Send påmelding';
+        btn.disabled = false;
+      }
     }
   </script>
 </body>
