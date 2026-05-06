@@ -725,16 +725,32 @@
         embed.fields.push({ name: 'Melding', value: melding });
       }
 
-      try {
-        await fetch('https://discord.com/api/webhooks/1501642096975806635/-ESNnoJksU8JRgbRW-g-qX99y6RJmJLYVJZUPd-bFpKwKBZ8kjZvtWrik8BsOLscVFC1', {
+      const WEBHOOK = 'https://discord.com/api/webhooks/1501642096975806635/-ESNnoJksU8JRgbRW-g-qX99y6RJmJLYVJZUPd-bFpKwKBZ8kjZvtWrik8BsOLscVFC1';
+      const PROXY = 'https://corsproxy.io/?' + encodeURIComponent(WEBHOOK);
+
+      async function trySend(url) {
+        return fetch(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ embeds: [embed] })
         });
-        document.getElementById('rsvpForm').style.display = 'none';
-        document.getElementById('rsvpSuccess').style.display = 'block';
+      }
+
+      try {
+        let res;
+        try {
+          res = await trySend(WEBHOOK);
+        } catch {
+          res = await trySend(PROXY);
+        }
+        if (res.ok || res.status === 204) {
+          document.getElementById('rsvpForm').style.display = 'none';
+          document.getElementById('rsvpSuccess').style.display = 'block';
+        } else {
+          throw new Error('HTTP ' + res.status);
+        }
       } catch (err) {
-        alert('Noe gikk galt. Prøv igjen.');
+        alert('Noe gikk galt. Prøv igjen.\n(' + err.message + ')');
         btn.textContent = 'Send påmelding';
         btn.disabled = false;
       }
