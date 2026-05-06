@@ -326,14 +326,88 @@
       gap: 1.2rem;
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
+    .guest-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-bottom: 0.8rem;
     }
 
-    @media (max-width: 600px) {
-      .form-row { grid-template-columns: 1fr; }
+    .guest-row {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .guest-row input {
+      flex: 1;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 0.9rem 1.1rem;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .guest-row input:focus { border-color: var(--gold); }
+
+    .guest-svar {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 0.9rem 0.8rem;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.3s ease;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      min-width: 130px;
+    }
+
+    .guest-svar:focus { border-color: var(--gold); }
+
+    .remove-guest-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .remove-guest-btn:hover {
+      border-color: #c0392b;
+      color: #c0392b;
+    }
+
+    .add-guest-btn {
+      background: none;
+      border: 1px dashed var(--gold-light);
+      color: var(--gold);
+      padding: 0.75rem 1.5rem;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+    }
+
+    .add-guest-btn:hover {
+      border-color: var(--gold);
+      background: rgba(184,154,94,0.05);
     }
 
     .form-group {
@@ -540,9 +614,15 @@
         grid-template-columns: 1fr;
       }
 
+      .guest-row { flex-wrap: wrap; }
+      .guest-row input { min-width: 0; }
+      .guest-svar { min-width: 0; flex: 1; }
+
       .form-group input,
       .form-group select,
-      .form-group textarea {
+      .form-group textarea,
+      .guest-row input,
+      .guest-svar {
         font-size: 1rem; /* prevents iOS zoom on focus */
         padding: 0.85rem 1rem;
       }
@@ -634,23 +714,10 @@
     <p class="section-text">Gi beskjed innen 1. mai 2026 om du kommer.</p>
 
     <div class="rsvp-form" id="rsvpForm">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Navn</label>
-          <input type="text" placeholder="Ditt fulle navn" id="rsvpNavn">
-        </div>
-        <div class="form-group">
-          <label>Kommer du?</label>
-          <select id="rsvpSvar">
-            <option value="">Velg...</option>
-            <option value="ja">Ja, jeg kommer!</option>
-            <option value="nei">Beklager, jeg kan ikke</option>
-          </select>
-        </div>
-      </div>
       <div class="form-group">
-        <label>Antall gjester (inkl. deg selv)</label>
-        <input type="number" placeholder="1" min="1" max="10" id="rsvpAntall">
+        <label>Hvem melder du på?</label>
+        <div id="guestList" class="guest-list"></div>
+        <button class="add-guest-btn" onclick="addGuest()">+ Legg til person</button>
       </div>
       <div class="form-group">
         <label>Melding (valgfritt)</label>
@@ -692,15 +759,48 @@
       });
     }
 
+    let guestCount = 0;
+
+    function addGuest() {
+      guestCount++;
+      const id = 'guest_' + guestCount;
+      const row = document.createElement('div');
+      row.className = 'guest-row';
+      row.id = 'row_' + id;
+      row.innerHTML = `
+        <input type="text" placeholder="Fullt navn" id="${id}_navn">
+        <select class="guest-svar" id="${id}_svar">
+          <option value="ja">✅ Kommer</option>
+          <option value="nei">❌ Kommer ikke</option>
+        </select>
+        <button class="remove-guest-btn" onclick="removeGuest('row_${id}')" title="Fjern">×</button>
+      `;
+      document.getElementById('guestList').appendChild(row);
+    }
+
+    function removeGuest(rowId) {
+      const row = document.getElementById(rowId);
+      if (row) row.remove();
+    }
+
+    // Start with one guest row
+    window.addEventListener('DOMContentLoaded', () => addGuest());
+
     // RSVP submit
     async function submitRSVP() {
-      const navn = document.getElementById('rsvpNavn').value.trim();
-      const svar = document.getElementById('rsvpSvar').value;
-      const antall = document.getElementById('rsvpAntall').value || '1';
+      const rows = document.querySelectorAll('.guest-row');
+      const guests = [];
+      for (const row of rows) {
+        const navnEl = row.querySelector('input[type="text"]');
+        const svarEl = row.querySelector('select');
+        const navn = navnEl ? navnEl.value.trim() : '';
+        const svar = svarEl ? svarEl.value : 'ja';
+        if (navn) guests.push({ navn, svar });
+      }
       const melding = document.getElementById('rsvpMelding').value.trim();
 
-      if (!navn || !svar) {
-        alert('Vennligst fyll ut navn og om du kommer.');
+      if (guests.length === 0) {
+        alert('Legg til minst én person.');
         return;
       }
 
@@ -708,22 +808,25 @@
       btn.textContent = 'Sender...';
       btn.disabled = true;
 
-      const svarTekst = svar === 'ja' ? '✅ Kommer!' : '❌ Kan ikke komme';
+      const kommer = guests.filter(g => g.svar === 'ja').map(g => g.navn);
+      const kommerIkke = guests.filter(g => g.svar === 'nei').map(g => g.navn);
+      const allColor = kommer.length > 0 ? 0x5cb85c : 0xd9534f;
+
+      const fields = [];
+      if (kommer.length > 0)
+        fields.push({ name: `✅ Kommer (${kommer.length})`, value: kommer.join('\n'), inline: true });
+      if (kommerIkke.length > 0)
+        fields.push({ name: `❌ Kommer ikke (${kommerIkke.length})`, value: kommerIkke.join('\n'), inline: true });
+      if (melding)
+        fields.push({ name: 'Melding', value: melding });
+
       const embed = {
         title: '🎉 Ny påmelding — Storm sin konfirmasjon',
-        color: svar === 'ja' ? 0x5cb85c : 0xd9534f,
-        fields: [
-          { name: 'Navn', value: navn, inline: true },
-          { name: 'Svar', value: svarTekst, inline: true },
-          { name: 'Antall gjester', value: antall, inline: true },
-        ],
+        color: allColor,
+        fields,
         footer: { text: 'Konfirmasjon 23. mai 2026 · Storm Skau Tvedt' },
         timestamp: new Date().toISOString()
       };
-
-      if (melding) {
-        embed.fields.push({ name: 'Melding', value: melding });
-      }
 
       const WEBHOOK = 'https://discord.com/api/webhooks/1501642096975806635/-ESNnoJksU8JRgbRW-g-qX99y6RJmJLYVJZUPd-bFpKwKBZ8kjZvtWrik8BsOLscVFC1';
       const PROXY = 'https://corsproxy.io/?' + encodeURIComponent(WEBHOOK);
